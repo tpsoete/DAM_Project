@@ -17,7 +17,8 @@ class Relation(Record):
     '''
 
     def __init__(self, tpl):
-        Record.__init__()
-        self.id1 = tpl[0]
-        self.id2 = tpl[1]
-        self.level = tpl[2]
+        Record.__init__(self, tpl)
+        self.id1, self.id2, self.level = tpl
+
+    def to_tuple(self):
+        return self.id1, self.id2, self.level

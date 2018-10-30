@@ -32,7 +32,8 @@ class User(Record):
     #     self.password = password
 
     def __init__(self, tpl):
-        Record.__init__()
-        self.uid = tpl[0]
-        self.nickname = tpl[1]
-        self.password = tpl[2]
+        Record.__init__(self, tpl)
+        self.uid, self.nickname, self.password = tpl
+
+    def to_tuple(self):
+        return self.uid, self.nickname, self.password
