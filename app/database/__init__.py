@@ -1,11 +1,11 @@
 from app.database.user import *
+from app.database.album import *
 
-__all__ = ['User']
+__all__ = ['User', 'Album']
 
 
 if __name__ == '__main__':
     db = Database('test.db')
-    # User.reset()
-    # db.modify("insert into user values('0','aaa','123456')")
-    # db.modify("insert into user values('1','bbb','654321')")
-    print(db.query('select * from user'))
+    Album.reset()
+    db.modify("insert into album values('11','/aaa','2')")
+    print(db.query('select * from album'))
