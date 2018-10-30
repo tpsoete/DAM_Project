@@ -18,10 +18,10 @@ class User(Record):
         birth DATE,
         level int,
         portrait VARCHAR(40),
-        --照片（相册）--
-        --视频--
         signature VARCHAR(140),
-        address VARCHAR(20)
+        address VARCHAR(20),
+        FOREIGN KEY (uid) REFERENCES album (uid),
+        FOREIGN KEY (uid) REFERENCES video (uid)
     );
     '''
 

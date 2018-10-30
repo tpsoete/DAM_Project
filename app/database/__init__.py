@@ -1,11 +1,12 @@
 from app.database.user import *
 from app.database.album import *
+from app.database.video import *
 
-__all__ = ['User', 'Album']
+__all__ = ['User', 'Album', 'Video']
 
 
 if __name__ == '__main__':
     db = Database('test.db')
-    Album.reset()
-    db.modify("insert into album values('11','/aaa','2')")
-    print(db.query('select * from album'))
+    Video.reset()
+    db.modify("insert into video values('11','/aaa','2')")
+    print(db.query('select * from video'))
