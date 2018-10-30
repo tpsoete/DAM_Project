@@ -11,11 +11,27 @@ class User(Record):
     _ddl = '''
     CREATE TABLE user(
         uid VARCHAR(20) PRIMARY KEY,
-        name VARCHAR(20)
+        real_name VARCHAR(20),
+        nickname VARCHAR(20),
+        password VARCHAR(20) not null,
+        gender CHAR(1),
+        birth DATE,
+        level int,
+        portrait VARCHAR(40),
+        --照片（相册）--
+        --视频--
+        signature VARCHAR(140),
+        address VARCHAR(20)
     );
     '''
 
-    def __init__(self, uid, name):
+    # def __init__(self, uid, nickname, password):
+    #     self.uid = uid
+    #     self.nickname = nickname
+    #     self.password = password
+
+    def __init__(self, tpl):
         Record.__init__()
-        self.uid = uid
-        self.name = name
+        self.uid = tpl[0]
+        self.nickname = tpl[1]
+        self.password = tpl[2]
