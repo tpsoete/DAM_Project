@@ -21,7 +21,8 @@ class User(Record):
         signature VARCHAR(140),
         address VARCHAR(20),
         FOREIGN KEY (uid) REFERENCES album (uid),
-        FOREIGN KEY (uid) REFERENCES video (uid)
+        FOREIGN KEY (uid) REFERENCES video (uid),
+        FOREIGN KEY (uid) REFERENCES relation (id1)
     );
     '''
 
