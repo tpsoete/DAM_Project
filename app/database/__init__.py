@@ -8,6 +8,5 @@ __all__ = ['User', 'Album', 'Video', 'Relation']
 
 if __name__ == '__main__':
     db = Database('test.db')
-    Relation.reset()
-    db.modify("insert into relation values('11','12','2')")
-    print(db.query('select * from relation'))
+    # User.reset()
+    print(User.login('111', '444'))
