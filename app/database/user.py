@@ -59,9 +59,9 @@ class User(Record):
         ''' + str(uid_temp)
         uid_sel = db.query(req)
         if len(uid_sel) == 0:
-            return 0
+            return False
         else:
-            return 1
+            return True
 
     @classmethod
     def login(cls, uid, password):  # 登陆，成功返回1，失败返回0
@@ -72,16 +72,16 @@ class User(Record):
         ''' + str(uid)
         password_sel = db.query(req)
         if len(password_sel) == 0:
-            return 0
-        if password_sel != password:
-            return 0
-        return 1
+            return False
+        if password_sel[0][0] != password:
+            return False
+        return True
 
     @classmethod
     def register(cls, uid, password, nickname):
         db = Database(cls._db)
-        if cls.uid_exists(uid) == 1:
-            return 0
+        if cls.uid_exists(uid):
+            return False
         temp = cls((uid, nickname, password,None,None,None,None,None,None,None))
         temp.insert(db)
-        return 1
+        return True

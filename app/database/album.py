@@ -16,8 +16,15 @@ class Album(Record):
     );
     '''
 
-    def __init__(self, tpl):
-        Record.__init__(self, tpl)
+    def __init__(self, uid=None, photo=None, level=None):
+        Record.__init__(self)
+        self.uid = uid
+        self.photo = photo
+        self.level = level
+
+    @classmethod
+    def from_tuple(cls, tpl):
+        self = cls()
         self.uid, self.photo, self.level = tpl
 
     def to_tuple(self):
