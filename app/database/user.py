@@ -26,13 +26,13 @@ class User(Record):
     );
     '''
 
-    def __init__(self, uid=None, real_name=None, nickname=None, password=None, gender=None,
+    def __init__(self, uid=None, nickname=None, password=None, real_name=None, gender=None,
                  birth=None, level=None, portrait=None, signature=None, address=None):
         Record.__init__(self)
         self.uid = uid
-        self.real_name = real_name
         self.nickname = nickname
         self.password = password
+        self.real_name = real_name
         self.gender = gender
         self.birth = birth
         self.level = level
@@ -43,11 +43,12 @@ class User(Record):
     @classmethod
     def from_tuple(cls, tpl):
         self = cls()
-        self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
+        self.uid, self.nickname, self.password, self.real_name, self.gender, self.birth, self.level, \
             self.portrait, self.signature, self.address = tpl
+        return self
 
     def to_tuple(self):
-        return self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level,\
+        return self.uid, self.nickname, self.password, self.real_name, self.gender, self.birth, self.level,\
                self.portrait, self.signature, self.address
 
     @classmethod
