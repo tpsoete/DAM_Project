@@ -16,6 +16,7 @@ class Database:
         else:
             self.filename = os.path.join(config.static_path, filename)
         self.conn = connect(self.filename)
+        self.lastexec = None
 
     def __del__(self):
         self.conn.close()
@@ -35,6 +36,7 @@ class Database:
             raise
         ret = cursor.fetchall()
         cursor.close()
+        self.lastexec = sql
         return ret
 
     def modify(self, sql):
@@ -53,6 +55,7 @@ class Database:
         self.conn.commit()
         ret = cursor.rowcount
         cursor.close()
+        self.lastexec = sql
         return ret
 
 
