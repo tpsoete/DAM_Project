@@ -3,7 +3,7 @@ from .db import *
 
 class Video(Record):
     """
-    用户信息
+    视频信息
     """
 
     # _db = 'data.db'

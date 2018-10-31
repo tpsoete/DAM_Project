@@ -3,7 +3,7 @@ from .db import *
 
 class Relation(Record):
     """
-    用户信息
+    关系信息
     """
 
     # _db = 'data.db'
