@@ -158,7 +158,7 @@ class Record:
     @classmethod
     def translate(cls, result):
         """将 SELECT 语句返回的表转为 list"""
-        
+
         if type(result) != list:
             raise TypeError('需要list类型')
         ans = []
