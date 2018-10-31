@@ -16,8 +16,15 @@ class Video(Record):
     );
     '''
 
-    def __init__(self, tpl):
-        Record.__init__(self, tpl)
+    def __init__(self, uid=None, video=None, level=None):
+        Record.__init__(self)
+        self.uid = uid
+        self.video = video
+        self.level = level
+
+    @classmethod
+    def from_tuple(cls, tpl):
+        self = cls()
         self.uid, self.video, self.level = tpl
 
     def to_tuple(self):
