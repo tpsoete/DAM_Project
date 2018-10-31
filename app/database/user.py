@@ -85,3 +85,18 @@ class User(Record):
         temp = cls((uid, nickname, password,None,None,None,None,None,None,None))
         temp.insert(db)
         return True
+
+    @classmethod
+    def update(cls,uid,part,value):
+        db = Database(cls._db)
+        if cls.uid_exists(uid):
+            return False
+        req='''
+        UPDATE user 
+        SET 
+        '''+part+'='+value+'''
+        where uid=
+        '''+uid
+        db.query(req)
+        return True
+
