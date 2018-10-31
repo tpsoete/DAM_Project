@@ -38,6 +38,11 @@ class Database:
         return ret
 
     def modify(self, sql):
+        """
+        数据库修改，返回受影响的行数
+        :param sql: SQL 修改语句
+        :return: 受影响的行数，-1表示不是修改语句
+        """
         cursor = self.conn.cursor()
         try:
             cursor.execute(sql)
@@ -48,32 +53,7 @@ class Database:
         self.conn.commit()
         ret = cursor.rowcount
         cursor.close()
-        return cursor.rowcount
-
-
-class DBNull:
-    """
-    用于 INSERT 语句中将 Python 的 None 转化为 null 输出
-    """
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        return 'null'
-
-    def __repr__(self):
-        return 'null'
-
-    @staticmethod
-    def convert(tpl):
-        """将 tuple 中的 None 替换为 null"""
-        ret = []
-        for item in tpl:
-            if item is None:
-                ret.append(DBNull())
-            else:
-                ret.append(item)
-        return tuple(ret)
+        return ret
 
 
 class Record:
@@ -102,21 +82,86 @@ class Record:
         db.modify("DROP TABLE IF EXISTS " + cls._table)
         db.modify(cls._ddl)
 
-    def __init__(self, tpl):
-        if type(tpl) != tuple:
-            raise TypeError('Record 类型构造需要 tuple 类型')
+    @classmethod
+    def connect(cls):
+        """连接对应的数据库"""
+        return Database(cls._db)
+
+    def __init__(self):
+        pass
+
+    # ---抽象数据处理---
+
+    @classmethod
+    @abstractmethod
+    def from_tuple(cls, tpl):
+        raise NotImplementedError('该类没有实现 from_tuple 方法')
 
     @abstractmethod
     def to_tuple(self):
         """转化为 tuple 用于 INSERT 语句"""
         pass
 
+    @staticmethod
+    def sql_const(value):
+        """
+        将 Python 中的数据转化为 SQL 常量表示：
+            None 替换为 null
+            字符串转义（单引号）
+            其他：等于 repr(value) 的返回结果
+
+        :param value: 要转化的值
+        :return: 转化后的值
+        """
+        if value is None:
+            return "null"
+
+        elif type(value) == str:
+            parts = value.split("'")
+            ret = "'" + parts[0]
+            for i in range(1, len(parts)):
+                ret += "''" + parts[i]
+            return ret + "'"
+
+        else:
+            return repr(value)
+
+    @staticmethod
+    def convert(tpl):
+        """
+        将 to_tuple 的返回结果转化为 INSERT 语句需要的格式（字符串）
+        """
+        ret = '('
+        first = True
+        for item in tpl:
+            if first:
+                first = False
+            else:
+                ret += ', '
+            ret += Record.sql_const(item)
+        return ret + ')'
+
+    def insert_sql(self):
+        """插入该数据对应的 INSERT 语句"""
+        return "INSERT INTO %s VALUES %s" % (self._table, Record.convert(self.to_tuple()))
+
     def insert(self, database=None):
         """
         将数据插入到对应表中
-        :param database: 指定数据库连接，不指定则新键
+        :param database: 指定数据库连接，不指定则新建连接
         """
-        if database is not Database:
+        if type(database) is not Database:
             database = Database(self._db)
-        sql = "INSERT INTO %s VALUES %s" % (self._table, DBNull.convert(self.to_tuple()))
+        sql = self.insert_sql()
         database.modify(sql)
+
+    @classmethod
+    def translate(cls, result):
+        """将 SELECT 语句返回的表转为 list"""
+
+        if type(result) != list:
+            raise TypeError('需要list类型')
+        ans = []
+        for tpl in result:
+            ans.append(cls.from_tuple(tpl))
+        return ans

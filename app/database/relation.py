@@ -16,8 +16,15 @@ class Relation(Record):
     );
     '''
 
-    def __init__(self, tpl):
-        Record.__init__(self, tpl)
+    def __init__(self, id1=None, id2=None, level=None):
+        Record.__init__(self)
+        self.id1 = id1
+        self.id2 = id2
+        self.level = level
+
+    @classmethod
+    def from_tuple(cls, tpl):
+        self = cls()
         self.id1, self.id2, self.level = tpl
 
     def to_tuple(self):

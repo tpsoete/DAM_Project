@@ -26,18 +26,28 @@ class User(Record):
     );
     '''
 
-    # def __init__(self, uid, nickname, password):
-    #     self.uid = uid
-    #     self.nickname = nickname
-    #     self.password = password
+    def __init__(self, uid=None, real_name=None, nickname=None, password=None, gender=None,
+                 birth=None, level=None, portrait=None, signature=None, address=None):
+        Record.__init__(self)
+        self.uid = uid
+        self.real_name = real_name
+        self.nickname = nickname
+        self.password = password
+        self.gender = gender
+        self.birth = birth
+        self.level = level
+        self.portrait = portrait
+        self.signature = signature
+        self.address = address
 
-    def __init__(self, tpl):
-        Record.__init__(self, tpl)
-        self.uid, self.nickname, self.password, self.real_name, self.gender, self.birth, self.level, \
+    @classmethod
+    def from_tuple(cls, tpl):
+        self = cls()
+        self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
             self.portrait, self.signature, self.address = tpl
 
     def to_tuple(self):
-        return self.uid, self.nickname, self.password, self.real_name, self.gender, self.birth, self.level, \
+        return self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level,\
                self.portrait, self.signature, self.address
 
     @classmethod
