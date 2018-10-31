@@ -3,7 +3,7 @@ from .db import *
 
 class Album(Record):
     """
-    用户信息
+    相册信息
     """
 
     # _db = 'data.db'
