@@ -10,8 +10,8 @@ class Album(Record):
     _table = 'album'
     _ddl = '''
     CREATE TABLE album(
-        uid VARCHAR(20) PRIMARY KEY,
-        photo VARCHAR(40),
+        uid VARCHAR(20) ,
+        photo VARCHAR(40)PRIMARY KEY,
         level int
     );
     '''
@@ -26,6 +26,19 @@ class Album(Record):
     def from_tuple(cls, tpl):
         self = cls()
         self.uid, self.photo, self.level = tpl
+        return self
 
     def to_tuple(self):
         return self.uid, self.photo, self.level
+
+    @classmethod
+    def get_album(cls, uid, level):
+        '''获取符合权限的相片'''
+        db = Database(cls._db)
+        req = '''
+            SELECT photo
+            FROM album
+            WHERE uid=%s AND
+            level<=%s
+            ''' % (uid, level)
+        return db.query(req)

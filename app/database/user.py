@@ -44,14 +44,16 @@ class User(Record):
     def from_tuple(cls, tpl):
         self = cls()
         self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
-            self.portrait, self.signature, self.address = tpl
+        self.portrait, self.signature, self.address = tpl
+        return self
 
     def to_tuple(self):
-        return self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level,\
+        return self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
                self.portrait, self.signature, self.address
 
     @classmethod
-    def uid_exists(cls, uid_temp):  # 检测uid是否存在
+    def uid_exists(cls, uid_temp):
+        """检测uid是否存在"""
         db = Database(cls._db)
         req = '''
         select uid from user
@@ -64,7 +66,8 @@ class User(Record):
             return True
 
     @classmethod
-    def login(cls, uid, password):  # 登陆，成功返回1，失败返回0
+    def login(cls, uid, password):
+        """登陆，成功返回1，失败返回0"""
         db = Database(cls._db)
         req = '''
         select password from user
@@ -82,21 +85,35 @@ class User(Record):
         db = Database(cls._db)
         if cls.uid_exists(uid):
             return False
-        temp = cls((uid, nickname, password,None,None,None,None,None,None,None))
+        temp = cls((uid, nickname, password, None, None, None, None, None, None, None))
         temp.insert(db)
         return True
 
     @classmethod
-    def update(cls,uid,part,value):
+    def update(cls, uid, part, value):
+        """更新数据"""
         db = Database(cls._db)
-        if cls.uid_exists(uid):
+        if not cls.uid_exists(uid):
             return False
-        req='''
+        req = '''
         UPDATE user 
-        SET 
-        '''+part+'='+value+'''
-        where uid=
-        '''+uid
-        db.query(req)
+        SET %s = %s
+        WHERE uid = %s
+        ''' % (part, value, uid)
+        print(req)
+        db.modify(req)
         return True
 
+    @classmethod
+    def delete(cls, uid):
+        """注销账户"""
+        db = Database(cls._db)
+        if not cls.uid_exists(uid):
+            return False
+        req = '''
+                DELETE FROM user
+                WHERE uid = %s
+                ''' % uid
+        print(req)
+        db.modify(req)
+        return True
