@@ -11,9 +11,9 @@ class User(Record):
     _ddl = '''
     CREATE TABLE user(
         uid VARCHAR(20) PRIMARY KEY,
+        real_name VARCHAR(20),
         nickname VARCHAR(20),
         password VARCHAR(20) not null,
-        real_name VARCHAR(20),
         gender CHAR(1),
         birth DATE,
         level int,
@@ -81,11 +81,11 @@ class User(Record):
         return True
 
     @classmethod
-    def register(cls, uid, password, nickname):
+    def register(cls, uid, real_name, nickname, password):
         db = Database(cls._db)
         if cls.uid_exists(uid):
             return False
-        temp = cls((uid, nickname, password, None, None, None, None, None, None, None))
+        temp = cls(uid=uid, real_name=real_name, nickname=nickname, password=password)
         temp.insert(db)
         return True
 
