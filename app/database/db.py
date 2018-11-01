@@ -1,6 +1,7 @@
 from sqlite3 import *
 from abc import abstractmethod
 import os
+from datetime import datetime, date, time
 
 from config import config
 
@@ -45,6 +46,7 @@ class Database:
         :param sql: SQL 修改语句
         :return: 受影响的行数，-1表示不是修改语句
         """
+
         cursor = self.conn.cursor()
         try:
             cursor.execute(sql)
@@ -71,6 +73,7 @@ class Record:
     @classmethod
     def tablename(cls):
         """获得表名"""
+
         return cls._table
 
     @classmethod
@@ -88,6 +91,7 @@ class Record:
     @classmethod
     def connect(cls):
         """连接对应的数据库"""
+
         return Database(cls._db)
 
     def __init__(self):
@@ -98,7 +102,8 @@ class Record:
     @classmethod
     @abstractmethod
     def from_tuple(cls, tpl):
-        raise NotImplementedError('该类没有实现 from_tuple 方法')
+        """从 tuple 构造"""
+        pass
 
     @abstractmethod
     def to_tuple(self):
@@ -111,11 +116,12 @@ class Record:
         将 Python 中的数据转化为 SQL 常量表示：
             None 替换为 null
             字符串转义（单引号）
+            日期使用其字符串值
             其他：等于 repr(value) 的返回结果
-
         :param value: 要转化的值
         :return: 转化后的值
         """
+
         if value is None:
             return "null"
 
@@ -126,6 +132,9 @@ class Record:
                 ret += "''" + parts[i]
             return ret + "'"
 
+        elif type(value) in (date, time, datetime):
+            return "'%s'" % str(value)
+
         else:
             return repr(value)
 
@@ -134,6 +143,7 @@ class Record:
         """
         将 to_tuple 的返回结果转化为 INSERT 语句需要的格式（字符串）
         """
+
         ret = '('
         first = True
         for item in tpl:
@@ -146,6 +156,7 @@ class Record:
 
     def insert_sql(self):
         """插入该数据对应的 INSERT 语句"""
+
         return "INSERT INTO %s VALUES %s" % (self._table, Record.convert(self.to_tuple()))
 
     def insert(self, database=None):
@@ -153,6 +164,7 @@ class Record:
         将数据插入到对应表中
         :param database: 指定数据库连接，不指定则新建连接
         """
+
         if type(database) is not Database:
             database = Database(self._db)
         sql = self.insert_sql()
