@@ -34,14 +34,42 @@
         <div class="video-content">
             <div class="inner">
                  <p>用户名</p>
-                 <input>
+                 <input id="username">
                  <p></p>
                  <p>密码</p>
-                 <input>
-                <a href="http://127.0.0.1:5000/main" data-poptrox="youtube,400x400">先直接登录了</a>
+                 <input id="password">
+                <a href="/main" data-poptrox="youtube,400x400">先直接登录了</a>
                 <div class="scroll-icon">
-                    <a class="scrollTo" data-scrollTo="masonry" href="#"><img src="static/img/scroll-icon.png" alt=""></a>
-                </div>    
+                    <a class="logIn" onclick="login()"><img src="static/img/scroll-icon.png" alt=""></a>
+                </div>
+
+                <script>
+                	function login() {
+                		username = document.getElementById("username").value
+                		password = document.getElementById("password").value
+
+                		var temp = document.createElement("form");
+					    temp.action = "/";
+					    temp.method = "post";
+					    temp.style.display = "none";
+
+					    PARAMS = {
+					    	"username" : username,
+					    	"password" : password
+					    }
+
+					    for (var x in PARAMS) {
+					        var opt = document.createElement("textarea");
+					        opt.name = x;
+					        opt.value = PARAMS[x];
+					        temp.appendChild(opt);
+					    }
+
+					    document.body.appendChild(temp);
+					    temp.submit()
+                	}
+
+                </script>
             </div>
         </div>
         <video autoplay="" loop="" muted>

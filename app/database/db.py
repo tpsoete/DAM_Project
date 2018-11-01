@@ -119,7 +119,8 @@ class Record:
     @staticmethod
     def sql_const(value):
         """
-        将 Python 中的数据转化为 SQL 常量表示：
+        将 Python 中的数据转化为 SQL 常量表示
+        仅用于 insert_
             None 替换为 null
             字符串转义（单引号）
             日期使用其字符串值
