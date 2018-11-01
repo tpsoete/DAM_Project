@@ -22,34 +22,41 @@ class Database:
     def __del__(self):
         self.conn.close()
 
-    def query(self, sql):
+    def query(self, sql, param=()):
         """
         数据库查询，返回查询结果
         :param sql: SQL 查询语句
+        :param param: 需要插入的参数
         :return: 查询结果（tuple 列表）
         """
 
+        if not isinstance(param, (tuple, list)):
+            param = (param, )
+        self.lastexec = sql, param
         cursor = self.conn.cursor()
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, param)
         except Exception as e:
             print(e)
             raise
         ret = cursor.fetchall()
         cursor.close()
-        self.lastexec = sql
         return ret
 
-    def modify(self, sql):
+    def modify(self, sql, param=()):
         """
         数据库修改，返回受影响的行数
         :param sql: SQL 修改语句
+        :param param: 需要插入的参数
         :return: 受影响的行数，-1表示不是修改语句
         """
 
+        if not isinstance(param, (tuple, list)):
+            param = (param, )
+        self.lastexec = sql, param
         cursor = self.conn.cursor()
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, param)
         except Exception as e:
             print(e)
             self.conn.rollback()
@@ -57,7 +64,6 @@ class Database:
         self.conn.commit()
         ret = cursor.rowcount
         cursor.close()
-        self.lastexec = sql
         return ret
 
 
@@ -125,14 +131,14 @@ class Record:
         if value is None:
             return "null"
 
-        elif type(value) == str:
+        elif isinstance(value, str):
             parts = value.split("'")
             ret = "'" + parts[0]
             for i in range(1, len(parts)):
                 ret += "''" + parts[i]
             return ret + "'"
 
-        elif type(value) in (date, time, datetime):
+        elif isinstance(value, (date, time, datetime)):
             return "'%s'" % str(value)
 
         else:
@@ -156,7 +162,6 @@ class Record:
 
     def insert_sql(self):
         """插入该数据对应的 INSERT 语句"""
-
         return "INSERT INTO %s VALUES %s" % (self._table, Record.convert(self.to_tuple()))
 
     def insert(self, database=None):
@@ -165,7 +170,7 @@ class Record:
         :param database: 指定数据库连接，不指定则新建连接
         """
 
-        if type(database) is not Database:
+        if not isinstance(database, Database):
             database = Database(self._db)
         sql = self.insert_sql()
         database.modify(sql)
@@ -174,7 +179,7 @@ class Record:
     def translate(cls, result):
         """将 SELECT 语句返回的表转为 list"""
 
-        if type(result) != list:
+        if not isinstance(result, list):
             raise TypeError('需要list类型')
         ans = []
         for tpl in result:
