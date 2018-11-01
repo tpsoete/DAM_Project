@@ -9,8 +9,12 @@ def hello_masonry():
         return render_template('login.html')
     else:
         username = request.form.get('username')
-        password = request.form.get("password")
-        if User.login(username, password) == User.LoginStatus.SUCCESS:
-            return redirect('/main')
+        password = request.form.get('password')
+        print("%s %s" % (username, password))
+        result = User.login(username, password)
+        if result == User.LoginStatus.SUCCESS:
+            return "1"
+        elif result == User.LoginStatus.NOT_EXIST:
+            return "用户名不存在"
         else:
-            return render_template('login.html')
+            return "密码错误"

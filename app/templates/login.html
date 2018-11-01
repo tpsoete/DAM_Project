@@ -33,47 +33,20 @@
         <div class="video-overlay"></div>
         <div class="video-content">
             <div class="inner">
-                 <p>用户名</p>
-                 <input id="username">
-                 <p></p>
-                 <p>密码</p>
-                 <input id="password">
-                <a href="/main" data-poptrox="youtube,400x400">先直接登录了</a>
+                <p>用户名</p>
+                <input id="username">
+                <p></p>
+                <p>密码</p>
+                <input id="password">
+                <a id="login-message" href="/main" data-poptrox="youtube,400x400">先直接登录了</a>
                 <div class="scroll-icon">
-                    <a class="logIn" onclick="login()"><img src="static/img/scroll-icon.png" alt=""></a>
+                    <a id="login-button" onclick="login()"><img src="static/img/scroll-icon.png" alt=""></a>
                 </div>
 
-                <script>
-                	function login() {
-                		username = document.getElementById("username").value
-                		password = document.getElementById("password").value
-
-                		var temp = document.createElement("form");
-					    temp.action = "/";
-					    temp.method = "post";
-					    temp.style.display = "none";
-
-					    PARAMS = {
-					    	"username" : username,
-					    	"password" : password
-					    }
-
-					    for (var x in PARAMS) {
-					        var opt = document.createElement("textarea");
-					        opt.name = x;
-					        opt.value = PARAMS[x];
-					        temp.appendChild(opt);
-					    }
-
-					    document.body.appendChild(temp);
-					    temp.submit()
-                	}
-
-                </script>
             </div>
         </div>
         <video autoplay="" loop="" muted>
-        	<source src="static/highway-loop.mp4" type="video/mp4" />
+            <source src="static/highway-loop.mp4" type="video/mp4" />
         </video>
     </div>
 
@@ -137,7 +110,42 @@
       </div>
     </div>
 
-    
+    <!-- 登录操作相关 -->
+    <script>
+        function login() {
+            username = document.getElementById("username").value
+            password = document.getElementById("password").value
+
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp = new XMLHttpRequest();
+            }
+            else
+            {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                {
+                    var message = xmlhttp.responseText
+                    if(message == "1") document.getElementById("login-message").click()
+                    else {
+                        alert(message)
+                        document.getElementById("login-message").innerHTML = message
+                    }
+                }
+            }
+
+            xmlhttp.open("POST", "/", true)
+            xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xmlhttp.send("username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password))
+        }
+
+    </script>
 
 
 
