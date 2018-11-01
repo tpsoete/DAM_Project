@@ -15,7 +15,7 @@ class Database:
         if abspath:
             self.filename = filename
         else:
-            self.filename = os.path.join(config.static_path, filename)
+            self.filename = os.path.join(config.STATIC_PATH, filename)
         self.conn = connect(self.filename)
         self.lastexec = None
 
@@ -120,7 +120,7 @@ class Record:
     def sql_const(value):
         """
         将 Python 中的数据转化为 SQL 常量表示
-        仅用于 insert_
+        仅用于 insert_sql 和 insert 函数，其他情况建议使用 sqlite 自带转换
             None 替换为 null
             字符串转义（单引号）
             日期使用其字符串值
