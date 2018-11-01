@@ -1,4 +1,5 @@
 from .db import *
+from enum import Enum
 
 
 class User(Record):
@@ -44,7 +45,7 @@ class User(Record):
     def from_tuple(cls, tpl):
         self = cls()
         self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
-        self.portrait, self.signature, self.address = tpl
+            self.portrait, self.signature, self.address = tpl
         return self
 
     def to_tuple(self):
@@ -55,39 +56,46 @@ class User(Record):
     def uid_exists(cls, uid_temp):
         """检测uid是否存在"""
         db = Database(cls._db)
-        req = '''
-        select uid from user
-        where uid = 
-        ''' + str(uid_temp)
-        uid_sel = db.query(req)
+        uid_sel = db.query("""
+            select uid from user
+            where uid = ?
+            """, uid_temp)
         if len(uid_sel) == 0:
             return False
         else:
             return True
 
+    class LoginStatus(Enum):
+        SUCCESS = 0
+        NOT_EXIST = 1
+        WRONG = 2
+
     @classmethod
     def login(cls, uid, password):
-        """登陆，成功返回1，失败返回0"""
+        """登陆，返回登录状态"""
         db = Database(cls._db)
-        req = '''
-        select password from user
-        where uid = 
-        ''' + str(uid)
-        password_sel = db.query(req)
+        password_sel = db.query("""
+            SELECT password FROM user
+            WHERE uid = ?
+            """, uid)
         if len(password_sel) == 0:
-            return False
+            return cls.LoginStatus.NOT_EXIST
         if password_sel[0][0] != password:
-            return False
-        return True
+            return cls.LoginStatus.WRONG
+        return cls.LoginStatus.SUCCESS
 
     @classmethod
     def register(cls, uid, real_name, nickname, password):
         db = Database(cls._db)
-        if cls.uid_exists(uid):
-            return False
-        temp = cls(uid=uid, real_name=real_name, nickname=nickname, password=password)
-        temp.insert(db)
-        return True
+        try:
+            if cls.uid_exists(uid):
+                return False
+            temp = cls(uid=uid, real_name=real_name, nickname=nickname, password=password)
+            temp.insert(db)
+            return True
+        except Exception as e:
+            print('last exec %s ' % db.lastexec)
+            raise
 
     @classmethod
     def update(cls, uid, part, value):
@@ -95,25 +103,18 @@ class User(Record):
         db = Database(cls._db)
         if not cls.uid_exists(uid):
             return False
-        req = '''
-        UPDATE user 
-        SET %s = %s
-        WHERE uid = %s
-        ''' % (part, value, uid)
-        print(req)
-        db.modify(req)
+        db.modify("""
+            UPDATE user 
+            SET %s = ?
+            WHERE uid = ?
+            """ % part, (value, uid))
         return True
 
     @classmethod
     def delete(cls, uid):
         """注销账户"""
         db = Database(cls._db)
-        if not cls.uid_exists(uid):
-            return False
-        req = '''
-                DELETE FROM user
-                WHERE uid = %s
-                ''' % uid
-        print(req)
-        db.modify(req)
-        return True
+        return db.modify("""
+            DELETE FROM user
+            WHERE uid = ?
+            """, uid) == 1
