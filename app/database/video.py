@@ -10,8 +10,8 @@ class Video(Record):
     _table = 'video'
     _ddl = '''
     CREATE TABLE video(
-        uid VARCHAR(20) PRIMARY KEY,
-        video VARCHAR(40),
+        uid VARCHAR(20),
+        video VARCHAR(40) PRIMARY KEY,
         level int
     );
     '''
@@ -26,6 +26,19 @@ class Video(Record):
     def from_tuple(cls, tpl):
         self = cls()
         self.uid, self.video, self.level = tpl
+        return self
 
     def to_tuple(self):
         return self.uid, self.video, self.level
+
+    @classmethod
+    def get_video(cls, uid, level):
+        '''获取符合权限的视频'''
+        db = Database(cls._db)
+        req = '''
+        SELECT video
+        FROM video
+        WHERE uid=%s AND
+        level<=%s
+        ''' % (uid, level)
+        return db.query(req)

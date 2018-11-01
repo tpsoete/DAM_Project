@@ -11,9 +11,9 @@ class User(Record):
     _ddl = '''
     CREATE TABLE user(
         uid VARCHAR(20) PRIMARY KEY,
+        real_name VARCHAR(20),
         nickname VARCHAR(20),
         password VARCHAR(20) not null,
-        real_name VARCHAR(20),
         gender CHAR(1),
         birth DATE,
         level int,
@@ -26,13 +26,13 @@ class User(Record):
     );
     '''
 
-    def __init__(self, uid=None, nickname=None, password=None, real_name=None, gender=None,
+    def __init__(self, uid=None, real_name=None, nickname=None, password=None, gender=None,
                  birth=None, level=None, portrait=None, signature=None, address=None):
         Record.__init__(self)
         self.uid = uid
+        self.real_name = real_name
         self.nickname = nickname
         self.password = password
-        self.real_name = real_name
         self.gender = gender
         self.birth = birth
         self.level = level
@@ -43,16 +43,17 @@ class User(Record):
     @classmethod
     def from_tuple(cls, tpl):
         self = cls()
-        self.uid, self.nickname, self.password, self.real_name, self.gender, self.birth, self.level, \
-            self.portrait, self.signature, self.address = tpl
+        self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
+        self.portrait, self.signature, self.address = tpl
         return self
 
     def to_tuple(self):
-        return self.uid, self.nickname, self.password, self.real_name, self.gender, self.birth, self.level,\
+        return self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
                self.portrait, self.signature, self.address
 
     @classmethod
-    def uid_exists(cls, uid_temp):  # 检测uid是否存在
+    def uid_exists(cls, uid_temp):
+        """检测uid是否存在"""
         db = Database(cls._db)
         req = '''
         select uid from user
@@ -65,7 +66,8 @@ class User(Record):
             return True
 
     @classmethod
-    def login(cls, uid, password):  # 登陆，成功返回1，失败返回0
+    def login(cls, uid, password):
+        """登陆，成功返回1，失败返回0"""
         db = Database(cls._db)
         req = '''
         select password from user
@@ -79,10 +81,39 @@ class User(Record):
         return True
 
     @classmethod
-    def register(cls, uid, password, nickname):
+    def register(cls, uid, real_name, nickname, password):
         db = Database(cls._db)
         if cls.uid_exists(uid):
             return False
-        temp = cls((uid, nickname, password,None,None,None,None,None,None,None))
+        temp = cls(uid=uid, real_name=real_name, nickname=nickname, password=password)
         temp.insert(db)
+        return True
+
+    @classmethod
+    def update(cls, uid, part, value):
+        """更新数据"""
+        db = Database(cls._db)
+        if not cls.uid_exists(uid):
+            return False
+        req = '''
+        UPDATE user 
+        SET %s = %s
+        WHERE uid = %s
+        ''' % (part, value, uid)
+        print(req)
+        db.modify(req)
+        return True
+
+    @classmethod
+    def delete(cls, uid):
+        """注销账户"""
+        db = Database(cls._db)
+        if not cls.uid_exists(uid):
+            return False
+        req = '''
+                DELETE FROM user
+                WHERE uid = %s
+                ''' % uid
+        print(req)
+        db.modify(req)
         return True
