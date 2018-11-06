@@ -118,3 +118,15 @@ class User(Record):
             DELETE FROM user
             WHERE uid = ?
             """, uid) == 1
+
+    @classmethod
+    def get(cls, uid):
+        db = cls.connect()
+        users = db.query("""
+            SELECT * FROM user
+            WHERE uid = ?
+            """, uid)
+        if len(users) == 0:
+            return None
+        else:
+            return cls.from_tuple(users[0])

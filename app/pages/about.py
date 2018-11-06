@@ -1,7 +1,8 @@
-from flask import render_template
+from flask import redirect
 from app import app
 
 
 @app.route('/about')
 def hello_about():
-    return render_template("about.html")
+    # TODO 关于我们
+    return redirect('/')

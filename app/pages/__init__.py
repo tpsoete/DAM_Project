@@ -1,5 +1,3 @@
 from .about import *
-from .blog import *
-from .grid import *
-from .main import *
+from .homepage import *
 from .login import *
