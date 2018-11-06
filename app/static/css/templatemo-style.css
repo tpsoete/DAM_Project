@@ -7,13 +7,14 @@ http://www.templatemo.com/tm-520-highway
 */
 
 body {
+  background-color: #f5f5f5;
   font-family: 'Kanit', sans-serif;
 }
 
 body::-webkit-scrollbar {
   width: 8px;
   height: 8px;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 /* Add a thumb */
 body::-webkit-scrollbar-thumb {
@@ -25,10 +26,12 @@ body, html {
   min-height: 100%;
   overflow-x: hidden;
 }
-
-
+.back{
+  background-image: url(../img/back.png);
+  background-size:cover;
+}
 .page-heading {
-  background-image: url(../img/heading_bg.png);
+  background-image: url(../img/back.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -41,19 +44,12 @@ body, html {
   text-transform: uppercase;
   color: #fff;
   letter-spacing: 1px;
-  background-color: rgba(250,250,250,0.1);
+
   display: inline-block;
   margin-bottom: 0;
   margin-top: 220px;
   padding: 20px 60px;
 }
-
-.page-heading .heading-content em {
-  font-style: normal;
-  font-weight: 200;
-}
-
-
 
 /* Nav Bar */
 
@@ -62,13 +58,8 @@ nav .logo {
   margin-left: 30px;
 }
 
-nav .logo a {
-  font-size: 28px;
-  line-height: 80px;
-  text-transform: uppercase;
-  color: #fff;
-  text-decoration: none;
-  letter-spacing: 0.5px;
+nav .logo img {
+  margin-top: 23px;
 }
 
 nav .logo em {
@@ -77,7 +68,7 @@ nav .logo em {
 }
 
 nav {
-  background: rgba(250,250,250,0.2);
+  background: rgba(250,250,250,0.92);
   height: 80px;
   position: fixed;
   width: 100%;
@@ -87,9 +78,241 @@ nav {
   box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.5);
 }
 
+/*main_user*/
+.part{
+  background-color: #f5f5f5;
+  height: 300px;
+  width: 100%;
+}
+.user{
+  height: 300px;
+  width: 1100px;
+  text-align:center;
+  margin-left:220px;
+}
+.left_p{
+  margin-top: 30px;
+  width: 20%;
+  float:left;
+  margin-left: 200px;
+}
+.left_p2{
+  width: 20%;
+  margin-left: 200px;
+}
+.right_p{
+  margin-top: 30px;
+  margin-left:450px;
+  width: 20%;
+  float:left;
+  text-align: right;
+  color: #d3145a;
+}
+
+.user_detail{
+  background: rgba(250,250,250,0.92);
+  height: 240px;
+  width: 270px;
+  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.5);
+  border:1px solid white;
+  border-radius:5%;
+  margin-top: 10px;
+  margin-left: 40px;
+  margin-right:40px;
+  float:left;
+}
+.user_detail img{
+  width:100px;
+  height:100px;
+  border-radius:150px;
+  margin-top: 30px;
+}
+.user_detail p{
+  margin-top: 10px;
+  text-align:center;
+}
+.user_detail button{
+  background-color: #d3145a;
+}
+
+
+
+.user_home{
+  margin-top: 40px;
+  height:200px;
+  width:100%;
+
+}
+.user_head{
+  margin-left: 400px;
+  width: 200px;
+  height: 200px;
+
+  float:left;
+  text-align: center;
+}
+.user_head img{
+  width:150px;
+  height:150px;
+  border-radius:170px;
+  margin-top: 25px;
+}
+.user_meg{
+  margin-left: 50px;
+  margin-top: 10px;
+  width: 200px;
+  height: 150px;
+
+  float:left;
+}
+.user_meg h2,h5
+{
+  font-weight:bold;
+}
+.user_meg h6{
+  color: #d3145a;
+}
+.add {
+  float:left;
+  margin-top: 30px;
+  margin-left: 70px;
+  border-radius:5px;
+  background-color: #e8e8e8;
+  border: 5px dashed;
+  width: 140px;
+  height: 140px;
+  color: #d3145a;
+  transition: color .25s;
+  position: relative;
+}
+.add::before{
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 80px;
+  margin-left: -40px;
+  margin-top: -5px;
+  border-top: 10px solid;
+}
+.add::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 80px;
+  margin-left: -5px;
+  margin-top: -40px;
+  border-left: 10px solid;
+}
+
+.post{
+  margin-left: 230px;
+  margin-right: 200px;
+  display: inline-block;
+  height:auto;
+}
+
+.post p{
+  margin-top: 50px;
+  text-align: center;
+  color: #d3145a;
+}
+.post img{
+  width: 302px;
+  height: 302px;
+  float:left;
+  margin-right:30px;
+  margin-left:30px;
+  margin-top:30px;
+}
+.login{
+  background: rgba(250,250,250,1);
+  height: 420px;
+  width: 380px;
+  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.5);
+  border:1px solid white;
+  border-radius:5%;
+  margin-top: 150px;
+  margin-left: 950px;
+  text-align: center;
+}
+.register{
+  background: rgba(250,250,250,1);
+  height: 500px;
+  width: 420px;
+  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.5);
+  border:1px solid white;
+  border-radius:5%;
+  margin-top: 80px;
+  margin-left: 550px;
+  text-align: center;
+}
+
+.login img{
+  margin-top: 50px;
+  margin-bottom: 30px;
+  height: 45px;
+  width: 100px;
+}
+.register img{
+  margin-top: 50px;
+  margin-bottom: 30px;
+  height: 45px;
+  width: 100px;
+}
+.form_input{
+  margin-top: 10px;
+  height:25px;
+  width:250px;
+  background:#dcdcdc;
+  border:5px solid #dcdcdc;
+  border-radius:5%;
+  padding-top:4px;
+  padding-right:4px;
+  padding-bottom:4px;
+  padding-left:4px;
+}
+
+.login-button {
+  margin-top: 20px;
+  width: 270px;
+  height: 40px;
+  border-width: 0px;
+  border-radius: 3px;
+  background: #d3145a;
+  cursor: pointer;
+  outline: none;
+  color: white;
+  text-align: center;
+  font-size: 17px;
+}
+.login-button:hover {
+  background: #c7254e;
+}
+
+.demo_line_05{
+  margin-top: 10px;
+  letter-spacing: -1px;
+  color: #9d9d9d;
+}
+.demo_line_05 span{
+  letter-spacing: 0;
+  color: #9d9d9d;
+  margin:0 20px;
+}
+.link_register nobr{
+  line-height:70px;
+  font-size:12px;
+}
+.link_register a{
+  color: #d3145a;
+  font-size:12px;
+}
+
 .menu-icon {
   background: transparent;
-  border: 1px solid #fff;
+  border: 1px solid #d3145a;
   width: 50px;
   height: 50px;
   margin: 15px 39px 0 auto;
@@ -106,7 +329,7 @@ nav {
   border-radius: 1px;
   height: 2px;
   width: 35px;
-  background: white;
+  background: #d3145a;
   position: absolute;
   left: 15%;
   top: 50%;
@@ -126,7 +349,7 @@ nav {
 }
 
 .menu-icon.active {
-  background: rgba(250,250,250,0.2);
+  background: #ffffff;
 }
 
 .menu-icon.active span {
@@ -148,7 +371,7 @@ nav {
 /* Menu */
 
 .overlay-menu {
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(255, 255, 255, 1);
   color: #ffffff;
   position: fixed;
   z-index: 100;
@@ -166,7 +389,7 @@ nav {
 }
 
 .overlay-menu.open {
-  opacity: 1;
+  opacity: 0.8;
   transform: translateY(0%);
 }
 
@@ -180,7 +403,7 @@ nav {
 .overlay-menu.open .main-menu {
   transition: all 0.7s;
   transition-delay: 0.7s;
-  opacity: 1;
+  opacity: 0.8;
   transform: translateY(0%);
 }
 
@@ -212,7 +435,7 @@ nav {
 .overlay-menu ul li a {
   font-size: 24px;
   font-weight: 300;
-  color: #fff;
+  color: #d3145a;
   text-decoration: none;
   transition: all 0.5s;
 }
@@ -254,7 +477,7 @@ nav {
 
 #video-container .video-overlay {
   z-index: 9999;
-  background: rgba(0,0,0,0.5);
+  background: rgba(250,250,250,0.5);
   width: 100%;
 }
 
@@ -405,7 +628,7 @@ nav {
 
 /* Modal */
 .modal {
-  background-color: rgba(0,0,0,.95);
+  background-color: rgba(250,250,250,.95);
   display: none;
   overflow: auto;
   position: fixed;
@@ -561,12 +784,12 @@ nav {
 footer {
   width: 100%;
   height: 80px;
-  background-color: #313131;
+  background-color: #ffffff;
 }
 
 footer p {
   text-align: center;
-  color: #fff;
+  color: #0f0f0f;
   font-weight: 200;
   font-size: 13px;
   text-transform: uppercase;
@@ -575,13 +798,13 @@ footer p {
 }
 
 footer a {
-  color: #aaa;
+  color: #0f0f0f;
   text-decoration: none;
 }
 
 footer a:hover {
   text-decoration: none;
-  color: #aaa;
+  color: #0f0f0f;
 }
 
 
@@ -684,7 +907,7 @@ footer a:hover {
 
 .grid-portfolio {
   padding: 65px 0px;
-  background-color: #232323;
+  background-color: #f5f5f5;
 }
 
 .grid-portfolio .portfolio-item {
@@ -754,7 +977,7 @@ footer a:hover {
   text-decoration: none;
   letter-spacing: 1px;
   color: #fff;
-  background-color: #313131;
+  background-color: #f8f8f8;
   transition: all 0.5s;
  }
 
@@ -766,7 +989,7 @@ footer a:hover {
 
 
  .services {
-  background-color: #232323;
+  background-color: #f5f5f5;
   padding: 65px 0px;
  }
 
@@ -778,7 +1001,7 @@ footer a:hover {
  }
 
   .services .service-item:hover {
-    background-color: #313131;
+    background-color: #f8f8f8;
   }
 
  .services .service-item .icon {
@@ -822,7 +1045,7 @@ footer a:hover {
 }
 
 .more-about-us .content {
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(250,250,250,0.8);
   text-align: left;
   padding: 150px 60px;
   color: #fff;

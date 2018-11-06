@@ -15,7 +15,7 @@ class Database:
         if abspath:
             self.filename = filename
         else:
-            self.filename = os.path.join(config.static_path, filename)
+            self.filename = os.path.join(config.STATIC_PATH, filename)
         self.conn = connect(self.filename)
         self.lastexec = None
 
@@ -120,7 +120,7 @@ class Record:
     def sql_const(value):
         """
         将 Python 中的数据转化为 SQL 常量表示
-        仅用于 insert_
+        仅用于 insert_sql 和 insert 函数，其他情况建议使用 sqlite 自带转换
             None 替换为 null
             字符串转义（单引号）
             日期使用其字符串值
@@ -169,20 +169,26 @@ class Record:
         """
         将数据插入到对应表中
         :param database: 指定数据库连接，不指定则新建连接
+        :return: 插入是否成功
         """
 
         if not isinstance(database, Database):
             database = Database(self._db)
         sql = self.insert_sql()
-        database.modify(sql)
+        return database.modify(sql) == 1
 
     @classmethod
     def translate(cls, result):
-        """将 SELECT 语句返回的表转为 list"""
+        """将 SELECT 语句返回的表转为对应类的 list"""
 
         if not isinstance(result, list):
             raise TypeError('需要list类型')
+
         ans = []
         for tpl in result:
-            ans.append(cls.from_tuple(tpl))
+            try:
+                ans.append(cls.from_tuple(tpl))
+            except ValueError:
+                raise TypeError('接受类型 %s 与表数据 %s 不匹配' % (cls, tpl))
+
         return ans
