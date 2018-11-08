@@ -6,14 +6,15 @@ class Relation(Record):
     关系信息
     """
 
-    # _db = 'data.db'
     _table = 'relation'
     _ddl = '''
     CREATE TABLE relation(
         id1 VARCHAR(20) NOT NULL,
         id2 VARCHAR(20) NOT NULL,
-        level int,
-        PRIMARY KEY(id1,id2)
+        level INT,
+        PRIMARY KEY (id1, id2),
+        FOREIGN KEY (id1) REFERENCES user (uid) ON DELETE CASCADE
+        FOREIGN KEY (id2) REFERENCES user (uid) ON DELETE CASCADE
     );
     '''
 

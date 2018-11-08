@@ -17,7 +17,8 @@ class Database:
         else:
             self.filename = os.path.join(config.STATIC_PATH, filename)
         self.conn = connect(self.filename)
-        self.lastexec = None
+        self.lastexec = "PRAGMA foreign_keys = ON"  # 开启外键约束
+        self.conn.execute(self.lastexec)
 
     def __del__(self):
         self.conn.close()
@@ -130,7 +131,7 @@ class Record:
         """
 
         if value is None:
-            return "null"
+            return "NULL"
 
         elif isinstance(value, str):
             parts = value.split("'")

@@ -11,10 +11,8 @@ def hello_login():
         return render_template('login.html')
     else:
         data = json.loads(request.get_data())
-        print(data)
         username = data['username']
         password = data['password']
-        print("%s %s" % (username, password))
         result = User.login(username, password)
         if result == User.LoginStatus.SUCCESS:
             return "1"
