@@ -7,23 +7,19 @@ class User(Record):
     用户信息
     """
 
-    # _db = 'data.db'
     _table = 'user'
     _ddl = '''
     CREATE TABLE user(
         uid VARCHAR(20) PRIMARY KEY,
         real_name VARCHAR(20),
         nickname VARCHAR(20),
-        password VARCHAR(20) not null,
-        gender CHAR(1),
+        password VARCHAR(20) NOT NULL,
+        gender CHAR(1) CHECK (gender IN ('M', 'F') OR gender IS NULL),
         birth DATE,
-        level int,
+        level INT,
         portrait VARCHAR(40),
-        signature VARCHAR(140),
-        address VARCHAR(20),
-        FOREIGN KEY (uid) REFERENCES album (uid),
-        FOREIGN KEY (uid) REFERENCES video (uid),
-        FOREIGN KEY (uid) REFERENCES relation (id1)
+        signature TEXT,
+        address VARCHAR(20)
     );
     '''
 
@@ -94,7 +90,7 @@ class User(Record):
             temp.insert(db)
             return True
         except Exception as e:
-            print('last exec %s ' % db.lastexec)
+            print('last exec %s' % db.lastexec)
             raise
 
     @classmethod
@@ -117,7 +113,7 @@ class User(Record):
         return db.modify("""
             DELETE FROM user
             WHERE uid = ?
-            """, uid) == 1
+            """, uid) > 0
 
     @classmethod
     def get(cls, uid):

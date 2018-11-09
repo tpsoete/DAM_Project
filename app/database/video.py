@@ -6,13 +6,13 @@ class Video(Record):
     视频信息
     """
 
-    # _db = 'data.db'
     _table = 'video'
     _ddl = '''
     CREATE TABLE video(
         uid VARCHAR(20),
-        video VARCHAR(40) PRIMARY KEY,
-        level int
+        video TEXT PRIMARY KEY,
+        level INT,
+        FOREIGN KEY (uid) REFERENCES user (uid) ON DELETE CASCADE
     );
     '''
 

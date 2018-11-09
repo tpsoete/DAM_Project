@@ -6,13 +6,13 @@ class Album(Record):
     相册信息
     """
 
-    # _db = 'data.db'
     _table = 'album'
     _ddl = '''
     CREATE TABLE album(
-        uid VARCHAR(20) ,
-        photo VARCHAR(40)PRIMARY KEY,
-        level int
+        uid VARCHAR(20) NOT NULL,
+        photo TEXT PRIMARY KEY,
+        level INT,
+        FOREIGN KEY (uid) REFERENCES user (uid) ON DELETE CASCADE
     );
     '''
 
@@ -33,7 +33,7 @@ class Album(Record):
 
     @classmethod
     def get_album(cls, uid, level):
-        '''获取符合权限的相片'''
+        """获取符合权限的相片"""
         db = Database(cls._db)
         req = '''
             SELECT photo
