@@ -14,13 +14,12 @@ http://www.templatemo.com/tm-520-highway
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
+        <link rel="stylesheet" type="text/css" href="static/弹窗.css">
         <link rel="stylesheet" href="static/css/bootstrap.min.css">
         <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="static/css/fontAwesome.css">
         <link rel="stylesheet" href="static/css/light-box.css">
         <link rel="stylesheet" href="static/css/templatemo-style.css">
-
         <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
         <script src="static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -59,9 +58,47 @@ http://www.templatemo.com/tm-520-highway
           <h5>男孩子</h5>
           <h6 class="sign">cdgfjhiugtf</h6>
       </div>
-      <div class = "add"></div>
-    </div>
+      <div id="open_btn" class = "add"></div>
 
+	<!-- 弹窗内容开始 -->
+
+	<div id="background">
+        <div id = "div1">
+
+            <div class = "overlay">
+                  <span id="close-button">×</span>
+                  <div class = "pop-title">
+                     <p><b>PICKING</b></p>
+                  </div>
+            </div>
+            <div class = "line_overlay"></div>
+            <div class = "user_picking">
+               <div class = "user_picking_head"><img src = "static/img/back.png"></div>
+               <div class = "user_picking_detail">
+                  <h3>XXX</h3>
+                  <h4>TheoXu</h4>
+                </div>
+                <div class = "user_picking_button"><button>已关注</button></div>
+            </div>
+            <div class = "user_picking">
+               <div class = "user_picking_head"><img src = "static/img/back.png"></div>
+               <div class = "user_picking_detail">
+                  <h3>XXX</h3>
+                  <h4>TheoXu</h4>
+                </div>
+                <div class = "user_picking_button"><button>已关注</button></div>
+             </div>
+             <div class = "user_picking">
+               <div class = "user_picking_head"><img src = "static/img/back.png"></div>
+               <div class = "user_picking_detail">
+                  <h3>XXX</h3>
+                  <h4>hdhi</h4>
+                </div>
+                <div class = "user_picking_button"><button>已关注</button></div>
+              </div>
+         </div>
+	  </div>
+    </div>
     <div class = "post">
         <p>帖子</p>
         <img src = "static/img/masonry_item_1.png">
@@ -83,54 +120,6 @@ http://www.templatemo.com/tm-520-highway
     </footer>
 
 
-      <!-- Modal button -->
-    <div class="popup-icon">
-      <button id="modBtn" class="modal-btn"><img src="static/img/contact-icon.png" alt=""></button>
-    </div>
-
-    <!-- Modal -->
-    <div id="modal" class="modal">
-      <!-- Modal Content -->
-      <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h3 class="header-title">Say hello to <em>Highway</em></h3>
-          <div class="close-btn"><img src="static/img/close_contact.png" alt=""></div>
-        </div>
-        <!-- Modal Body -->
-        <div class="modal-body">
-          <div class="col-md-6 col-md-offset-3">
-            <form id="contact" action="" method="post">
-                <div class="row">
-                    <div class="col-md-12">
-                      <fieldset>
-                        <input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">
-                      </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <fieldset>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="Your email..." required="">
-                      </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <fieldset>
-                        <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>
-                      </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <fieldset>
-                        <button type="submit" id="form-submit" class="btn">Send Message Now</button>
-                      </fieldset>
-                    </div>
-                </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
 
     <section class="overlay-menu">
       <div class="container">
@@ -138,10 +127,10 @@ http://www.templatemo.com/tm-520-highway
           <div class="main-menu">
               <ul>
                    <li>
-                      <a href="http://127.0.0.1:5000/homepage">HOMEPAGE</a>
+                      <a href="/homepage">HOMEPAGE</a>
                   </li>
                   <li>
-                      <a href="http://127.0.0.1:5000/explore">EXPLORE</a>
+                      <a href="/explore">EXPLORE</a>
                   </li>
                    <li>
                       <a>ABOUT US</a>
@@ -153,14 +142,14 @@ http://www.templatemo.com/tm-520-highway
       </div>
     </section>
 
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="static/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+	<script src="static/弹窗.js"></script>
+    <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
 
     <script src="static/js/vendor/bootstrap.min.js"></script>
 
     <script src="static/js/plugins.js"></script>
     <script src="static/js/main.js"></script>
+
 
 </body>
 </html>
