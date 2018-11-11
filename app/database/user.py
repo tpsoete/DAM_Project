@@ -48,6 +48,12 @@ class User(Record):
         return self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
                self.portrait, self.signature, self.address
 
+    def __str__(self):
+        return str(self.to_tuple())
+
+    def __repr__(self):
+        return 'User' + repr(self.to_tuple())
+
     @classmethod
     def uid_exists(cls, uid_temp):
         """检测uid是否存在"""
@@ -126,3 +132,15 @@ class User(Record):
             return None
         else:
             return cls.from_tuple(users[0])
+
+    @classmethod
+    def recommend(cls, gender, count):
+        """随机推荐用户"""
+
+        db = cls.connect()
+        ans = db.query("""
+            SELECT * FROM user 
+            WHERE gender = ?
+            ORDER BY RANDOM() LIMIT %d
+            """ % count, gender)
+        return User.translate(ans)
