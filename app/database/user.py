@@ -25,6 +25,10 @@ class User(Record):
 
     def __init__(self, uid=None, real_name=None, nickname=None, password=None, gender=None,
                  birth=None, level=None, portrait=None, signature=None, address=None):
+        """
+
+        :rtype: object
+        """
         Record.__init__(self)
         self.uid = uid
         self.real_name = real_name
@@ -41,7 +45,7 @@ class User(Record):
     def from_tuple(cls, tpl):
         self = cls()
         self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
-            self.portrait, self.signature, self.address = tpl
+        self.portrait, self.signature, self.address = tpl
         return self
 
     def to_tuple(self):
@@ -126,3 +130,13 @@ class User(Record):
             return None
         else:
             return cls.from_tuple(users[0])
+    
+    # @classmethod
+    # def random_pick(cls, gender):  # 随机推荐对象（测试）
+    #     db = cls.connect()
+    #     user_list = db.query("""
+    #     SELECT uid FROM user
+    #     WHERE gender != ?
+    #     ORDER BY RANDOM() LIMIT 3
+    #     """, gender)
+
