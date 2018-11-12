@@ -18,7 +18,7 @@ class Relation(Record):
     );
     '''
 
-    def __init__(self, id1=None, id2=None, level=None):
+    def __init__(self, id1=None, id2=None, level=1):
         Record.__init__(self)
         self.id1 = id1
         self.id2 = id2
@@ -46,3 +46,29 @@ class Relation(Record):
         if len(level) == 0:
             return None
         return level[0][0]
+
+    @classmethod
+    def get_picked(cls, uid1):
+        db = cls.connect()
+        req = '''
+            SELECT id2
+            FROM relation
+            WHERE id1=%s
+            ''' % uid1
+        picked_users = db.query(req)
+        if len(picked_users) == 0:
+            return None
+        return picked_users
+
+    @classmethod
+    def get_follower(cls, uid2):
+        db = cls.connect()
+        req = '''
+                SELECT id1
+                FROM relation
+                WHERE id2=%s
+                ''' % uid2
+        picked_users = db.query(req)
+        if len(picked_users) == 0:
+            return 0
+        return picked_users

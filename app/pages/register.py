@@ -5,7 +5,7 @@ from app.database import *
 import json
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST','GET'])
 def hello_register():
     if request.method == 'GET':
         return render_template("register.html")
@@ -15,10 +15,8 @@ def hello_register():
         realname = data['realname']
         nickname = data['nickname']
         password = data['password']
-        user = User(uid=username, password=password, nickname=nickname, real_name=realname)
-        if User.uid_exists(username):
+        resutl = User.register(uid=username, password=password, nickname=nickname, real_name=realname)
+        if not resutl:
             return "用户已存在"
         else:
-            user.insert()
-            return "创建成功"
-
+            return 1;
