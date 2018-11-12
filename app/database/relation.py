@@ -39,8 +39,8 @@ class Relation(Record):
         req = '''
         SELECT level
         FROM relation
-        WHERE id1=%s AND
-        id2=%s
+        WHERE id1='%s' AND
+        id2='%s'
         ''' % (uid1, uid2)
         level = db.query(req)
         if len(level) == 0:
@@ -53,7 +53,7 @@ class Relation(Record):
         req = '''
             SELECT id2
             FROM relation
-            WHERE id1=%s
+            WHERE id1='%s'
             ''' % uid1
         picked_users = db.query(req)
         if len(picked_users) == 0:
@@ -66,7 +66,7 @@ class Relation(Record):
         req = '''
                 SELECT id1
                 FROM relation
-                WHERE id2=%s
+                WHERE id2='%s'
                 ''' % uid2
         picked_users = db.query(req)
         if len(picked_users) == 0:
