@@ -1,0 +1,61 @@
+.main{
+    width: 1000px;
+    margin-left: 18%;
+}
+
+.division{
+    height: 1px;
+    width: 100%;
+    background: #d6d6d6;
+}
+
+#nickname{
+    font-family: "Microsoft YaHei UI Light";
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+#followers_list{
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    margin-right: 20px;
+	color: #d3145a;
+    cursor: pointer;
+}
+#pick_list{
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    margin-right: 40px;
+    color: #d3145a;
+    cursor: pointer;
+}
+
+#edit{
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    color: #d3145a;
+    cursor: pointer;
+}
+
+#realname{
+    margin-top: 10px;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+}
+
+#age{
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+}
+
+#gender{
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+}
+
+#signment{
+    margin-top: 10px;
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    color: #d3145a;
+}
