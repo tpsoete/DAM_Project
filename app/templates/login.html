@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="static/css/templatemo-style.css">
+     <link rel="stylesheet" href="static/css/templatemo-style.css">
 </head>
 <body class = "back">
     <div class = "login">
@@ -12,16 +12,15 @@
             <div><input id="username" type="text" class="form_input" placeholder="账号"/></div>
             <div><input id="password" type="password" class="form_input" placeholder="密码"/></div>
             <div><button id="login-button" class = "login-button">登录</button></div>
-            <a id="login-success" href = "/homepage" hidden></a>
+            <a id="login-success" href = "/explore" hidden></a>
             <div class="demo_line_05">———————<span>或</span>———————</div>
             <div class="link_register"><nobr>没有账户？</nobr>
                 <a href = "/register">注册</a>
             </div>
         </form>
     </div>
-
     <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
-
+    <script src="static/js/vendor/user.js"></script>
     <!-- 登录操作相关 -->
     <script>
         $(function(){
@@ -36,8 +35,10 @@
                     dataType: "text",
                     type: "POST",
                     success: function(result) {
-                        if(result == "1") { 
+                        if(result == "1") {
                             $("#login-success")[0].click()
+                            userName : $("#username").val()
+                            window.location.href='/explore';
                         }
                         else {
                             alert(result)
@@ -49,3 +50,4 @@
     </script>
 </body>
 </html>
+
