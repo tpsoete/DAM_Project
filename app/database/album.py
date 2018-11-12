@@ -1,4 +1,5 @@
 from .db import *
+from .user import User
 
 
 class Album(Record):
@@ -11,7 +12,7 @@ class Album(Record):
     CREATE TABLE album(
         uid VARCHAR(20) NOT NULL,
         photo TEXT PRIMARY KEY,
-        level INT,
+        level INT DEFAULT 0,
         FOREIGN KEY (uid) REFERENCES user (uid) ON DELETE CASCADE
     );
     '''
@@ -31,14 +32,31 @@ class Album(Record):
     def to_tuple(self):
         return self.uid, self.photo, self.level
 
+    def __str__(self):
+        return str(self.to_tuple())
+
+    def __repr__(self):
+        return 'User' + repr(self.to_tuple())
+
     @classmethod
-    def get_album(cls, uid, level):
+    def get_all(cls, uid, level=255, count=9):
         """获取符合权限的相片"""
+
         db = Database(cls._db)
-        req = '''
-            SELECT photo
-            FROM album
-            WHERE uid=%s AND
-            level<=%s
-            ''' % (uid, level)
-        return db.query(req)
+        ans = db.query("""
+            SELECT * FROM album
+            WHERE uid = ? AND level <= ?
+            ORDER BY RANDOM() LIMIT %d
+        """ % count, (uid, level))
+        return Album.translate(ans)
+
+    @classmethod
+    def explore(cls, uid, count=9):
+        """随机选取，不能取到自己的"""
+
+        db = cls.connect()
+        ans = db.query("""
+            SELECT * FROM album
+            WHERE uid != ? AND level = 0
+        """, uid)
+        return Album.translate(ans)

@@ -133,12 +133,11 @@ class User(Record):
         else:
             return cls.from_tuple(users[0])
 
-    @classmethod
-    def recommend(cls, uid, gender, count):
+    def recommend(self, count):
         """随机推荐用户"""
 
-        db = cls.connect()
-        if gender == 'M':
+        db = self.connect()
+        if self.gender == 'M':
             gender = 'F'
         else:
             gender = 'M'
@@ -152,20 +151,19 @@ class User(Record):
                 )
             )
             ORDER BY RANDOM() LIMIT %d
-        """ % count, (gender, uid))
+        """ % count, (gender, self.uid))
         return User.translate(ans)
 
-    @classmethod
-    def all_picked(cls, uid):
+    def all_picked(self, uid):
         """返回pick的所有用户信息"""
 
-        db = cls.connect()
+        db = self.connect()
 
         ans = db.query("""
             SELECT * FROM user
             WHERE uid IN(
                 SELECT id2 FROM relation
                 WHERE id1 = ?
-            )""", uid)
+            )""", self.uid)
 
         return User.translate(ans)
