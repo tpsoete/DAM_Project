@@ -56,8 +56,6 @@ class Relation(Record):
             WHERE id1='%s'
             ''' % uid1
         picked_users = db.query(req)
-        if len(picked_users) == 0:
-            return None
         return picked_users
 
     @classmethod
@@ -69,6 +67,4 @@ class Relation(Record):
                 WHERE id2='%s'
                 ''' % uid2
         picked_users = db.query(req)
-        if len(picked_users) == 0:
-            return 0
         return picked_users
