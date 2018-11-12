@@ -16,7 +16,7 @@ class User(Record):
         password VARCHAR(20) NOT NULL,
         gender CHAR(1) CHECK (gender IN ('M', 'F') OR gender IS NULL),
         birth DATE,
-        level INT,
+        level INT DEFAULT 0,
         portrait VARCHAR(40),
         signature TEXT,
         address VARCHAR(20)
@@ -25,10 +25,6 @@ class User(Record):
 
     def __init__(self, uid=None, real_name=None, nickname=None, password=None, gender=None,
                  birth=None, level=None, portrait=None, signature=None, address=None):
-        """
-
-        :rtype: object
-        """
         Record.__init__(self)
         self.uid = uid
         self.real_name = real_name
@@ -45,12 +41,18 @@ class User(Record):
     def from_tuple(cls, tpl):
         self = cls()
         self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
-        self.portrait, self.signature, self.address = tpl
+            self.portrait, self.signature, self.address = tpl
         return self
 
     def to_tuple(self):
         return self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
                self.portrait, self.signature, self.address
+
+    def __str__(self):
+        return str(self.to_tuple())
+
+    def __repr__(self):
+        return 'User' + repr(self.to_tuple())
 
     @classmethod
     def uid_exists(cls, uid_temp):
@@ -130,13 +132,40 @@ class User(Record):
             return None
         else:
             return cls.from_tuple(users[0])
-    
-    # @classmethod
-    # def random_pick(cls, gender):  # 随机推荐对象（测试）
-    #     db = cls.connect()
-    #     user_list = db.query("""
-    #     SELECT uid FROM user
-    #     WHERE gender != ?
-    #     ORDER BY RANDOM() LIMIT 3
-    #     """, gender)
 
+    @classmethod
+    def recommend(cls, uid, gender, count):
+        """随机推荐用户"""
+
+        db = cls.connect()
+        if gender == 'M':
+            gender = 'F'
+        else:
+            gender = 'M'
+
+        ans = db.query("""
+            SELECT * FROM (
+                SELECT * FROM user
+                WHERE gender = ? AND uid NOT IN(
+                    SELECT id2 FROM relation
+                    WHERE id1 = ?
+                )
+            )
+            ORDER BY RANDOM() LIMIT %d
+        """ % count, (gender, uid))
+        return User.translate(ans)
+
+    @classmethod
+    def all_picked(cls, uid):
+        """返回pick的所有用户信息"""
+
+        db = cls.connect()
+
+        ans = db.query("""
+            SELECT * FROM user
+            WHERE uid IN(
+                SELECT id2 FROM relation
+                WHERE id1 = ?
+            )""", uid)
+
+        return User.translate(ans)
