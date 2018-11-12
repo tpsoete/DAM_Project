@@ -39,6 +39,6 @@ class Video(Record):
         SELECT video
         FROM video
         WHERE uid='%s' AND
-        level<='%s'
+        level<=%s
         ''' % (uid, level)
         return db.query(req)

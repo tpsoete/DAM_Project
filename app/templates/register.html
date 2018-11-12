@@ -8,16 +8,48 @@
 <body>
     <div class = "register">
      <img src = "static/img/logo.png">
-      <form action="" method="get">
-        <div><input type="text" class="form_input" placeholder="学号"/></div>
-        <div><input type="text" class="form_input" placeholder="姓名"/></div>
-        <div><input type="text" class="form_input" placeholder="昵称"/></div>
-        <div><input type="text" class="form_input" placeholder="密码"/></div>
-        <div><button class = "login-button">登录</button></div>
-        <div class="link_register"><nobr>有账户了？</nobr>
-        <a href="/">请登录</a>
-        </div>
-    </form>
+        <form action="" method="get">
+            <div><input id='id' type="text" class="form_input" placeholder="学号"/></div>
+            <div><input id='username' type="text" class="form_input" placeholder="姓名"/></div>
+            <div><input id='nikName' type="text" class="form_input" placeholder="昵称"/></div>
+            <div><input id='password' type="text" class="form_input" placeholder="密码"/></div>
+            <div><button id="register-button" class = "login-button">登录</button></div>
+            <a id="register-success" href = "/explore" hidden></a>
+            <div class="link_register"><nobr>有账户了？</nobr>
+            <a href="http://127.0.0.1:5000">请登录</a>
+            </div>
+        </form>
     </div>
+    <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="static/js/vendor/user.js"></script>
+    <!-- 登录操作相关 -->
+    <script>
+        $(function(){
+            $("#login-button").click(function(){
+                var data = JSON.stringify({
+                    id : $("#id").val(),
+                    nikName : $("#nikName").val(),
+                    username : $("#username").val(),
+                    password : $("#password").val()
+                })
+
+                $.ajax({
+                    data: data,
+                    dataType: "text",
+                    type: "POST",
+                    success: function(result) {
+                        if(result == "1") {
+                            //$("#login-success")[0].click()
+                            userName : $("#username").val()
+                            window.location.href='/explore';
+                        }
+                        else {
+                            alert(result)
+                        }
+                    }
+                })
+            })
+        })
+    </script>
 </body>
 </html>
