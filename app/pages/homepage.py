@@ -1,7 +1,11 @@
-from flask import render_template
+from flask import render_template, request
 from app import app
 
 
-@app.route('/homepage')
+@app.route('/homepage', methods=['GET', 'POST'])
 def hello_home():
-    return render_template("homepage.html")
+    if request.method == 'GET':
+        return render_template("homepage.html")
+    else:
+        return "None"
+
