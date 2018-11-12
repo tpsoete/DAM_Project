@@ -21,7 +21,7 @@ def picking():
             re = []
             picked_id = Relation.get_picked(username)
             for id_i in picked_id:
-                picked_info = User.get(id_i)
+                picked_info = User.get(id_i[0])
                 result = {
                     "portrait": picked_info.portrait,
                     "realname": picked_info.real_name,
@@ -36,7 +36,7 @@ def picking():
             re = []
             picked_id = Relation.get_follower(username)
             for id_i in picked_id:
-                picked_info = User.get(id_i)
+                picked_info = User.get(id_i[0])
                 relation = Relation.get_level(username, picked_info.uid)
                 if relation != 0:
                     relation = 1
