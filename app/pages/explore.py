@@ -24,7 +24,7 @@ def hello_explore():
                 result.append({
                     "username": rec.uid,
                     "nickname": rec.nickname,
-                    "portrait": r"static\img\back.png"
+                    "portrait": rec.portrait
                 })
             print(result)
             return json.dumps(result)
@@ -38,7 +38,7 @@ def hello_explore():
                 assert isinstance(al, Album)
                 result.append({
                     "nickname": User.get(al.uid).nickname,
-                    "img": r"static\img\back.png"  # al.photo
+                    "img": al.photo
                 })
             print(result)
             return json.dumps(result)
