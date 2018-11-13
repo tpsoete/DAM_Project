@@ -26,7 +26,7 @@ def hello_explore():
                     "nickname": rec.nickname,
                     "portrait": rec.portrait
                 })
-            print(result)
+            # print(result)
             return json.dumps(result)
 
         elif dtype == "explore":
@@ -40,7 +40,7 @@ def hello_explore():
                     "nickname": User.get(al.uid).nickname,
                     "img": al.photo
                 })
-            print(result)
+            # print(result)
             return json.dumps(result)
 
 
