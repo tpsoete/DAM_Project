@@ -9,7 +9,7 @@ from app.database import Relation, User
 @app.route('/homepage', methods=['POST', 'GET'])  # 获取该用户所有已关注的用户信息
 def picking():
     if request.method == 'GET':
-        return render_template("register.html")
+        return render_template("homepage.html")
     
     else:
         data = json.loads(request.get_data())

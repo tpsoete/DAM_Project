@@ -16,7 +16,7 @@
             <div><button id="register-button" class = "login-button">登录</button></div>
             <a id="register-success" href = "/explore" hidden></a>
             <div class="link_register"><nobr>有账户了？</nobr>
-            <a href="http://127.0.0.1:5000">请登录</a>
+            <a href="/">请登录</a>
             </div>
         </form>
     </div>
@@ -39,8 +39,7 @@
                     type: "POST",
                     success: function(result) {
                         if(result == "1") {
-                            $("#login-success")[0].click()
-
+                            //$("#login-success")[0].click()
                             userName : $("#username").val()
                             window.location.href='/explore';
                         }

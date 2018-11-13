@@ -17,7 +17,7 @@ class Album(Record):
     );
     '''
 
-    def __init__(self, uid=None, photo=None, level=None):
+    def __init__(self, uid=None, photo=None, level=0):
         Record.__init__(self)
         self.uid = uid
         self.photo = photo
@@ -58,5 +58,6 @@ class Album(Record):
         ans = db.query("""
             SELECT * FROM album
             WHERE uid != ? AND level = 0
-        """, uid)
+            ORDER BY RANDOM() LIMIT %d
+        """ % count, uid)
         return Album.translate(ans)
