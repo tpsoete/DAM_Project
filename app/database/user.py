@@ -1,5 +1,6 @@
 from .db import *
 from enum import Enum
+from .coin import Coin
 
 
 class User(Record):
@@ -41,7 +42,7 @@ class User(Record):
     def from_tuple(cls, tpl):
         self = cls()
         self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
-            self.portrait, self.signature, self.address = tpl
+        self.portrait, self.signature, self.address = tpl
         return self
 
     def to_tuple(self):
@@ -167,3 +168,18 @@ class User(Record):
             )""", self.uid)
 
         return User.translate(ans)
+    """
+    计算等级
+    """
+    def calc_level(self):
+        exp = Coin.get_exp(self.uid)
+        """
+        待改正
+        """
+        level_exp = [0, 100, 220, 364, 536, 742, 990, 1111111111]
+        i = 0
+        while exp > level_exp[i + 1]:
+            i += 1
+        level = i
+        exp = exp - level_exp[i]
+        self.level = level

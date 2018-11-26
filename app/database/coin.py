@@ -1,5 +1,5 @@
 from .db import *
-from .user import User
+
 
 
 class Coin(Record):
@@ -55,3 +55,20 @@ class Coin(Record):
                     WHERE uid = ?
                 """, uid)
         return exp[0][0]
+
+    """
+    更改硬币数量（使用或获取）
+    """
+    @classmethod
+    def change_coin(cls, uid, num):
+        db = Database(cls._db)
+        coin = Coin.get_coin(uid)
+        coin += num
+        if coin >= 0:
+            db.query("""
+                            UPDATE coin set ? FROM coin
+                            WHERE uid=?
+                        """, coin, uid)
+            return True  # 硬币足够
+        else:
+            return False  # 硬币不足
