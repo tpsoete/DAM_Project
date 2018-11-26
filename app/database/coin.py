@@ -72,3 +72,13 @@ class Coin(Record):
             return True  # 硬币足够
         else:
             return False  # 硬币不足
+
+    """
+    更改经验值
+    """
+    @classmethod
+    def change_exp(cls, uid, num):
+        db = Database(cls._db)
+        exp = Coin.get_exp(uid)
+        exp += num
+        return True
