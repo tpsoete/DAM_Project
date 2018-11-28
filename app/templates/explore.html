@@ -5,11 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Highway Grid CSS Template</title>
 <!--
-
 Highway Template
-
 http://www.templatemo.com/tm-520-highway
-
 -->
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,22 +15,30 @@ http://www.templatemo.com/tm-520-highway
         <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="static/css/fontAwesome.css">
         <link rel="stylesheet" href="static/css/light-box.css">
-        <link rel="stylesheet" href="static/css/templatemo-style.css">
+        <link rel="stylesheet" href="static/css/templatemo-style-explore.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
         <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
+        <script src="static/js/explore.js"></script>
         <script src="static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
 
 <body>
-
     <nav>
         <div class="logo">
             <img src="static/img/logo.png">
         </div>
-      <div class="menu-icon">
-        <span></span>
-      </div>
+        <div class="searchpart">
+          <div class="search">
+             <form>
+                <input id="explorer" type="text" placeholder="">
+                <button id="search-button"></button>
+             </form>
+           </div>
+        </div>
+        <div class="menu-icon">
+           <span></span>
+        </div>
     </nav>
 
     <div class="page-heading">
@@ -50,18 +55,18 @@ http://www.templatemo.com/tm-520-highway
     <div class="user">
        <div class = "user_detail">
           <img src = "static/img/1.png" >
-          <p>小蓉蓉</p>
-          <button class="pick-button">查看用户</button>
+          <p id="nikName">小蓉蓉</p>
+          <button class="view-button">查看用户</button>
        </div>
        <div class = "user_detail">
           <img src = "static/img/2.jpg">
-          <p>小琦琦</p>
-          <button class="pick-button">查看用户</button>
+          <p id="nikName">小琦琦</p>
+          <button class="view-button">查看用户</button>
        </div>
        <div class = "user_detail">
           <img src = "static/img/3.png" onclick="select()">
-          <p>小远远</p>
-          <button class="pick-button">查看用户</button>
+          <p id="nikName">小远远</p>
+          <button class="view-button">查看用户</button>
        </div>
     </div>
     </div>
@@ -246,13 +251,13 @@ http://www.templatemo.com/tm-520-highway
                 <div class="main-menu">
                     <ul>
                         <li>
-                            <a href="/homepage">HOMEPAGE</a>
+                            <button id="homepage">HOMEPAGE</button>
                         </li>
                         <li>
-                            <a href="/explore">EXPLORE</a>
+                            <button id="explore">EXPLORE</button>
                         </li>
                         <li>
-                            <a>ABOUT US</a>
+                            <button>ABOUT US</button>
                         </li>
                     </ul>
                 </div>
@@ -263,63 +268,7 @@ http://www.templatemo.com/tm-520-highway
 
     <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
 
-	<script>
-		$(function(){
 
-			var user_update = function() {
-				var data = JSON.stringify({
-					type: "recommend",
-					username: "123"
-				})
-
-				$.ajax({
-					data: data,
-					dataType: "json",
-					type: "POST",
-					success: function(result) {
-						var users = eval(result);
-						var i = 0;
-						$(".user_detail").each(function(){
-							if(users[i] == undefined) return false;
-							$(this).find('img').attr('src', users[i].portrait);
-							$(this).find('img').attr('href', "/user?id=" + users[i].username)
-							$(this).find('p').html(users[i].nickname)
-		                    i++;
-						});
-					}
-				})
-			}
-
-			var thumb_update = function() {
-				var data = JSON.stringify({
-					type: "explore",
-					username: "123"
-				})
-
-				$.ajax({
-					data: data,
-					dataType: "json",
-					type: "POST",
-					success: function(result) {
-						var images = eval(result)
-		                var i = 0;
-						$(".thumb").each(function(){
-							if(images[i] == undefined) return false;
-							$(this).find('a').attr('href', images[i].img)
-							$(this).find('h1').html(images[i].nickname+"<em>’s photo</em>")
-							$(this).find('img').attr('src', images[i].img)
-		                    i++;
-						});
-					}
-				})
-			}
-
-		    $("#change-button").click(function(){
-		    	user_update();
-		    	thumb_update();
-		    })
-		})    
-    </script>
 
     <script src="static/js/vendor/bootstrap.min.js"></script>
 
