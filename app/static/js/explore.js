@@ -56,15 +56,15 @@ $(function(){
     })
     $("#search-button").click(function(){
         var e = document.getElementById("explorer");
-        window.location.href="/explorer?"+"username="+encodeURI(userName)+" & explore="+encodeURI(e.value);//change after merge
+        window.location.href="explorer.html?"+"username="+encodeURI(userName)+" & explore="+encodeURI(e.value);//change after merge
 
     })
     $("#homepage").click(function(){
-        window.location.href="/homepage?"+"username="+encodeURI(userName);//change after merge
+        window.location.href="homepage.html?"+"username="+encodeURI(userName);//change after merge
 
     })
     $("#explore").click(function(){
-        window.location.href="/explorer?"+"username="+encodeURI(userName);//change after merge
+        window.location.href="explorer.html?"+"username="+encodeURI(userName);//change after merge
 
     })
     $("#view-button").click(function(){
@@ -76,7 +76,7 @@ $(function(){
             dataType: "text",
             type: "POST",
             success: function(result) {
-                window.location.href="/explorer?"+"username="+encodeURI(userName)+" & explorer="+encodeURI(result);//change after merge
+                window.location.href="explorer.html?"+"username="+encodeURI(userName)+" & explorer="+encodeURI(result);//change after merge
             }
         })
 
