@@ -64,7 +64,7 @@ $(function(){
 
     })
     $("#explore").click(function(){
-        window.location.href="/explorer?"+"username="+encodeURI(userName)+;//change after merge
+        window.location.href="/explorer?"+"username="+encodeURI(userName);//change after merge
 
     })
     $("#view-button").click(function(){
