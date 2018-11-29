@@ -11,9 +11,8 @@ $(function(){
             type: "POST",
             success: function(result) {
                 if(result == "1") {
-                    $("#login-success")[0].click()
                     var s = document.getElementById("username");
-                    window.location.href="explore.html?"+"username="+encodeURI(s.value);
+                    window.location.href="explore?"+"username="+encodeURI(s.value);
                 }
                 else {
                     alert(result)

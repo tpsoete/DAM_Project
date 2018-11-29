@@ -50,33 +50,36 @@ var thumb_update = function() {
 user_update();
 thumb_update();
 $(function(){
+
     $("#change-button").click(function(){
         user_update();
         thumb_update();
     })
     $("#search-button").click(function(){
         var e = document.getElementById("explorer");
-        window.location.href="explorer.html?"+"username="+encodeURI(userName)+" & explore="+encodeURI(e.value);//change after merge
+        window.location.href="explorer?"+"username="+encodeURI(userName)+" & explore="+encodeURI(e.value);//change after merge
 
     })
     $("#homepage").click(function(){
-        window.location.href="homepage.html?"+"username="+encodeURI(userName);//change after merge
+        window.location.href="homepage?"+"username="+encodeURI(userName);//change after merge
 
     })
     $("#explore").click(function(){
-        window.location.href="explorer.html?"+"username="+encodeURI(userName);//change after merge
+        window.location.href="explorer?"+"username="+encodeURI(userName);//change after merge
 
     })
-    $("#view-button").click(function(){
+    $(".view-button").click(function(){
+        alert($(this).parents().find(".nikName").html())
         var data = JSON.stringify({
-            nikName : $("#nikName").val(),    //get the corresponding username
+            type : "view",
+            nikName : $(this).parents().find(".nikName").html(),    //get the corresponding username
         })
         $.ajax({
             data: data,
             dataType: "text",
             type: "POST",
             success: function(result) {
-                window.location.href="explorer.html?"+"username="+encodeURI(userName)+" & explorer="+encodeURI(result);//change after merge
+                window.location.href="explorer?"+"username="+encodeURI(userName)+" & explorer="+encodeURI(result);//change after merge
             }
         })
 

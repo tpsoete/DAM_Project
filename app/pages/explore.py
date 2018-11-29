@@ -43,4 +43,14 @@ def hello_explore():
             # print(result)
             return json.dumps(result)
 
+        elif dtype == "view":
+            un = data['nikName']
+            print(un)
+            return "123"
+
+        else:
+            return None
+
+
+
 
