@@ -5,6 +5,7 @@ def demo_data():
     User.reset()
     Relation.reset()
     Album.reset()
+    Coin.reset()
     db = User.connect()
 
     User(uid='123', real_name='名字', nickname='昵称', password='123', gender='M').insert(db)

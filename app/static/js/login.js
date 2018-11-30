@@ -1,5 +1,5 @@
 $(function(){
-    $("#login-button").click(function(){
+    $("#form-main").submit(function(){
         var data = JSON.stringify({
             username : $("#username").val(),
             password : $("#password").val()
@@ -9,6 +9,7 @@ $(function(){
             data: data,
             dataType: "text",
             type: "POST",
+            url: "/login",
             success: function(result) {
                 if(result == "1") {
                     var s = document.getElementById("username");

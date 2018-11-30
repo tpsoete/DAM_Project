@@ -4,8 +4,7 @@ import os
 from flask import render_template, request, jsonify, redirect, url_for
 from app import app
 from app.database import Relation, User
-from werkzeug.utils import  secure_filename
-from .encode import encode
+from werkzeug.utils import secure_filename
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'JPG', 'PNG', 'bmp'}
 
