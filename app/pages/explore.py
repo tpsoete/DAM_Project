@@ -12,10 +12,9 @@ def hello_explore():
         if username is None:
             # return redirect('/')
             pass
-        return render_template("explore.html", username="123")
+        return render_template("explore.html", username=username)
     else:
         data = json.loads(request.get_data())
-        print(data)
         dtype = data['type']
         if dtype == "recommend":
             # 推荐用户
@@ -44,13 +43,7 @@ def hello_explore():
                     "nickname": User.get(al.uid).nickname,
                     "img": al.photo
                 })
-            # print(result)
             return json.dumps(result)
-
-        elif dtype == "view":
-            un = data['username']
-            print(un)
-            return "123"
 
         else:
             return None

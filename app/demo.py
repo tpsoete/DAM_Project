@@ -8,7 +8,9 @@ def demo_data():
     Coin.reset()
     db = User.connect()
 
-    User(uid='123', real_name='名字', nickname='昵称', password='123', gender='M').insert(db)
+    User.register(uid='123', real_name='名字', nickname='昵称', password='123', gender='M')
+    User.register(uid='124', real_name='SHINMEI', nickname='NAMAE', password='124', gender='M')
+
     User(uid='1', real_name='名字', nickname='小蓉蓉', password='123', gender='F',
          portrait="static/img/1.png").insert(db)
     User(uid='2', real_name='名字', nickname='小琦琦', password='123', gender='F',
