@@ -1,12 +1,7 @@
-var userName
-var loc = location.href;
-var n1 = loc.length;//地址的总长度
-var n2 = loc.indexOf("=");//取得=号的位置
-userName = decodeURI(loc.substr(n2+1, n1-n2));
 var user_update = function() {
     var data = JSON.stringify({
         type: "recommend",
-        username: userName
+        username: username
     })
     $.ajax({
         data: data,
@@ -18,17 +13,19 @@ var user_update = function() {
             $(".user_detail").each(function(){
                 if(users[i] == undefined) return false;
                 $(this).find('img').attr('src', users[i].portrait);
-                $(this).find('img').attr('href', "/user?id=" + users[i].username)
-                $(this).find('p').html(users[i].nickname)
+                $(this).find('img').attr('href', "/explore?username=" + users[i].username)
+                $(this).find('.nickname').html(users[i].nickname)
+                $(this).find('.uid').html(users[i].username)
                 i++;
             });
         }
     })
 }
+
 var thumb_update = function() {
     var data = JSON.stringify({
         type: "explore",
-        username: userName
+        username: username
     })
     $.ajax({
         data: data,
@@ -47,42 +44,38 @@ var thumb_update = function() {
         }
     })
 }
+
 user_update();
 thumb_update();
+
 $(function(){
 
     $("#change-button").click(function(){
         user_update();
         thumb_update();
     })
-    $("#search-button").click(function(){
-        var e = document.getElementById("explorer");
-        window.location.href="explorer?"+"username="+encodeURI(userName)+" & explore="+encodeURI(e.value);//change after merge
 
+    $("#search-form").submit(function(){
+        var e = $("#explorer").val();
+        if(e == "") return false
+        window.location.href="homepage?"+"username="+encodeURI(e)+"&explorer="+encodeURI(username);//change after merge
+        return false
     })
+
     $("#homepage").click(function(){
-        window.location.href="homepage?"+"username="+encodeURI(userName);//change after merge
+        window.location.href="homepage?"+"username="+encodeURI(username);//change after merge
 
     })
+
     $("#explore").click(function(){
-        window.location.href="explorer?"+"username="+encodeURI(userName);//change after merge
+        window.location.href="explore?"+"username="+encodeURI(username);//change after merge
 
     })
-    $(".view-button").click(function(){
-        alert($(this).parents().find(".nikName").html())
-        var data = JSON.stringify({
-            type : "view",
-            nikName : $(this).parents().find(".nikName").html(),    //get the corresponding username
-        })
-        $.ajax({
-            data: data,
-            dataType: "text",
-            type: "POST",
-            success: function(result) {
-                window.location.href="explorer?"+"username="+encodeURI(userName)+" & explorer="+encodeURI(result);//change after merge
-            }
-        })
 
+    $(".view-button").click(function(){
+        var target = $(this).parents().find(".uid").html()
+
+        window.location.href="homepage?username="+encodeURI(target)+"&explorer="+encodeURI(username);//change after merge
     })
 
 })

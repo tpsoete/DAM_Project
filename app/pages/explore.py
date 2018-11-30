@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, redirect
 from app import app
 from app.database import *
 
@@ -8,7 +8,11 @@ import json
 @app.route('/explore', methods=['GET', 'POST'])
 def hello_explore():
     if request.method == 'GET':
-        return render_template("explore.html")
+        username = request.args.get('username')
+        if username is None:
+            # return redirect('/')
+            pass
+        return render_template("explore.html", username="123")
     else:
         data = json.loads(request.get_data())
         print(data)
@@ -44,7 +48,7 @@ def hello_explore():
             return json.dumps(result)
 
         elif dtype == "view":
-            un = data['nikName']
+            un = data['username']
             print(un)
             return "123"
 
