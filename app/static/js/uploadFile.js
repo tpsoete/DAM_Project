@@ -1,6 +1,5 @@
 $("#buttonAdd").on("change", function () {
     var formData = new FormData($("#buttonAdd")[0]);
-    formData.append('username',)
     $.ajax({
         url:"/upload",
         type:"POST",

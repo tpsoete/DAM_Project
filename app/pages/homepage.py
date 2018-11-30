@@ -3,9 +3,8 @@ import os
 
 from flask import render_template, request, jsonify, redirect, url_for
 from app import app
-from app.database import Relation, User
-from werkzeug.utils import  secure_filename
-from .encode import encode
+from app.database import Relation, User, Album
+from werkzeug.utils import secure_filename
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'JPG', 'PNG', 'bmp'}
 
@@ -18,7 +17,7 @@ def allowed_file(filename):
 def picking():
     if request.method == 'GET':
         return render_template("homepage.html")
-    
+
     else:
         data = json.loads(request.get_data())
         dtype = data['type']
@@ -64,12 +63,15 @@ def upload():
     if request.method == 'POST':
         print("1111")
         fileUpload = request.files['fileInput']
-    #if not(fileUpload and allowed_file(fileUpload.filename)):
-    #    return jsonify({"error": 1001, "msg": "type error"})
+        # if not(fileUpload and allowed_file(fileUpload.filename)):
+        #    return jsonify({"error": 1001, "msg": "type error"})
 
-        uploadPath = "app/static/img/pic.png"
+        uploadPath = "app/static/upload/pic.png"
         fileUpload.save(uploadPath)
 
-    #waterMark = './static/img/logo.png'
-    #encode(uploadPath, waterMark, uploadPath)
+        # waterMark = './static/img/logo.png'
+        # encode(uploadPath, waterMark, uploadPath)
+        """写入数据库"""
+        dbPath=uploadPath[4:]
+        Album('123', dbPath).insert()
         return jsonify({"code": 1111, "msg": "succeed!"})
