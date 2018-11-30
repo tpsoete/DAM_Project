@@ -65,20 +65,19 @@ def upload():
         fileUpload = request.files['fileInput']
         # if not(fileUpload and allowed_file(fileUpload.filename)):
         #    return jsonify({"error": 1001, "msg": "type error"})
-        print(request.values['type'])
-        uploadPath = "app/static/upload/pic.png"
-        fileUpload.save(uploadPath)
-
-
-
         # waterMark = './static/img/logo.png'
         # encode(uploadPath, waterMark, uploadPath)
         """写入数据库"""
         if request.values['type']=='file':
             """如果是图片"""
-            dbPath=uploadPath[4:]
+            uploadPath = "app/static/upload/pic.png"
+            fileUpload.save(uploadPath)
+            dbPath = uploadPath[4:]
             Album('123', dbPath).insert()
         else:
             """如果是头像"""
-            User.update('123','portrait',uploadPath)
+            uploadPath = "app/static/portrait/001.png"
+            fileUpload.save(uploadPath)
+            dbPath = uploadPath[4:]
+            User.update('123','portrait',dbPath)
         return jsonify({"code": 1111, "msg": "succeed!"})

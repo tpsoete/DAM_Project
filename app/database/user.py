@@ -88,12 +88,12 @@ class User(Record):
         return cls.LoginStatus.SUCCESS
 
     @classmethod
-    def register(cls, uid, real_name, nickname, password, gender):
+    def register(cls, uid, real_name, nickname, password,gender):
         db = Database(cls._db)
         try:
             if cls.uid_exists(uid):
                 return False
-            temp = cls(uid=uid, real_name=real_name, nickname=nickname, password=password, gender=gender,
+            temp = cls(uid=uid, real_name=real_name, nickname=nickname, password=password,gender=gender,
                        portrait="static/portrait/default.png")
             temp.insert(db)
             return True
@@ -169,11 +169,9 @@ class User(Record):
             )""", self.uid)
 
         return User.translate(ans)
-
     """
     计算等级
     """
-
     def calc_level(self):
         exp = Coin.get_exp(self.uid)
         """
