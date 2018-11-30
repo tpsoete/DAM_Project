@@ -2,37 +2,23 @@ from os.path import *
 
 
 class Config:
-    DEBUG = True
+    DEBUG = True    # 是否开启调试模式
 
-    APP_PATH = join(abspath(dirname(__file__)), 'app')
-    STATIC_PATH = join(APP_PATH, 'static')
-    PUBLIC_HOST = False
-
-    CONFIG_TYPE = 'BASIC'
+    APP_PATH = join(abspath(dirname(__file__)), 'app')  # app模块路径
+    STATIC_PATH = join(APP_PATH, 'static')  # static 路径
+    PUBLIC_HOST = False     # 是否监听所有IP（公网访问）
+    PORT = 5000     # 服务器部署的端口
 
 
 class DebugConfig(Config):
-
-    CONFIG_TYPE = 'DEBUG'
+    pass
 
 
 class ReleaseConfig(Config):
     DEBUG = False
 
     PUBLIC_HOST = True
-
-    CONFIG_TYPE = 'RELEASE'
-
-
-class ActiveConfig(DebugConfig):
-    """
-    当前正在使用的配置
-    """
+    PORT = 80
 
 
-config = ActiveConfig()
-if __name__ == '__main__':
-    print(config.APP_PATH)
-    print(config.STATIC_PATH)
-    print(type(config))
-    print(config.__class__)
+config = DebugConfig()

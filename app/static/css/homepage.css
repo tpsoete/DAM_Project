@@ -1,6 +1,6 @@
 .main{
     width: 1000px;
-    margin-left: 18%;
+    margin-left: 260px;
 }
 
 .division{
@@ -58,4 +58,25 @@
     font-family: "Microsoft YaHei";
     font-size: 12px;
     color: #d3145a;
+}
+
+#buttonAdd{
+    float:left;
+    margin-top: 30px;
+    margin-left: 80px;
+    width: 154px;
+    height:154px;
+    background:url("../img/button.png");
+    position:relative;
+}
+
+#fileInput{
+    height:154px;
+    width:154px;
+    font-size: 300px;
+    position:absolute;
+    right:0;
+    top:0;
+    opacity: 0;
+    filter:alpha(opacity=0);
 }

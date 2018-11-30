@@ -11,11 +11,15 @@ def hello_register():
         return render_template("register.html")
     else:
         data = json.loads(request.get_data())
-        username = data['username']
-        realname = data['realname']
-        nickname = data['nickname']
+        print(data)
+        username = data['id']
+        realname = data['username']
+        nickname = data['nikName']
         password = data['password']
+        if username is None or len(username) < 2:
+            return "无效ID"
         result = User.register(uid=username, password=password, nickname=nickname, real_name=realname)
+        print(result)
         if result:
             return "1"
         else:

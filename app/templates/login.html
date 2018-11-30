@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-     <link rel="stylesheet" href="static/css/templatemo-style.css">
+    <link rel="stylesheet" href="static/css/templatemo-style.css">
 </head>
 <body class = "back">
     <div class = "login">
@@ -18,33 +18,10 @@
             </div>
         </form>
     </div>
-    <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
-    <script src="static/js/vendor/user.js"></script>
-    <!-- 登录操作相关 -->
-    <script>
-        $(function(){
-            $("#login-button").click(function(){
-                var data = JSON.stringify({
-                    username : $("#username").val(),
-                    password : $("#password").val()
-                })
 
-                $.ajax({
-                    data: data,
-                    dataType: "text",
-                    type: "POST",
-                    success: function(result) {
-                        if(result == "1") {
-                            userName : $("#username").val()
-                            window.location.href='/explore'
-                        }
-                        else {
-                            alert(result)
-                        }
-                    }
-                })
-            })
-        })
-    </script>
+    <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
+
+    <!-- 登录操作相关 -->
+    <script src="static/js/login.js"></script>
 </body>
 </html>
