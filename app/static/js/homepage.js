@@ -1,3 +1,10 @@
+function addImg(imgsrc) {
+    var post = document.getElementById("post");
+    var img = document.createElement("img");
+    img.src = imgsrc;
+    post.appendChild(img);
+}
+
 
 $("#buttonAdd").on("change", function () {
     var formData = new FormData($("#buttonAdd")[0]);
@@ -13,10 +20,10 @@ $("#buttonAdd").on("change", function () {
         processData:false,
         success:function (json_data) {
             alert("upload succeed!")
+            addImg(json_data.path)
         },
         error:function (json_data) {
             alert(json_data)
-            console.log(json_data)
         }
     });
 });

@@ -84,4 +84,4 @@ def upload():
             fileUpload.save(uploadPath)
             dbPath = uploadPath[4:]
             User.update('123','portrait',dbPath)
-        return jsonify({"code": 1111, "msg": "succeed!"})
+        return jsonify({"code": 1111, "msg": "succeed!", "path": dbPath})

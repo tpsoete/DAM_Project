@@ -160,21 +160,13 @@ http://www.templatemo.com/tm-520-highway
                         <form id = "headFile" method="post" enctype = "multipart/form-data">
                             <input id = "headUpload" name="fileInput" type="file"/>
                         </form>
-
                     </div>
                 </div>
 	        </div>
         </div>
-
-        <div class = "post">
-            <p>帖子</p>
-            <div class="division"></div>
-            <img src = "../static/img/post1.jpg">
-            <img src = "../static/img/post2.jpg">
-            <img src = "../static/img/post3.jpg">
-            <img src = "../static/img/post4.jpg">
-            <img src = "../static/img/post5.jpg">
-            <img src = "../static/img/post6.jpg">
+        <div id="texxt">帖子</div>
+        <div class="division"></div>
+        <div class = "post" id = "post">
         </div>
     </div>
 
@@ -192,10 +184,10 @@ http://www.templatemo.com/tm-520-highway
                 <div class="main-menu">
                     <ul>
                         <li>
-                            <a href="homepage.html">HOMEPAGE</a>
+                            <a href="homepage">HOMEPAGE</a>
                         </li>
                         <li>
-                            <a href="explore.html">EXPLORE</a>
+                            <a href="explore">EXPLORE</a>
                         </li>
                         <li>
                             <a>ABOUT US</a>
@@ -206,14 +198,17 @@ http://www.templatemo.com/tm-520-highway
         </div>
     </section>
 
-    <script src="../static/js/vendor/jquery-1.11.2.min.js"></script>
-    <script src="../static/js/uploadFile.js"></script>
-	<script src="../static/js/弹窗.js"></script>
+    <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
+    <script>
+        var username = {{ username }}
+    </script>
+    <script src="static/js/homepage.js"></script>
 
-    <script src="../static/js/vendor/bootstrap.min.js"></script>
+	<script src="static/js/弹窗.js"></script>
+    <script src="static/js/vendor/bootstrap.min.js"></script>
 
-    <script src="../static/js/plugins.js"></script>
-    <script src="../static/js/main.js"></script>
+    <script src="static/js/plugins.js"></script>
+    <script src="static/js/main.js"></script>
 
 
 </body>
