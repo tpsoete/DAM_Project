@@ -80,3 +80,24 @@
     opacity: 0;
     filter:alpha(opacity=0);
 }
+
+#headFile{
+    float:left;
+    margin-top: 30px;
+    margin-left: 80px;
+    width: 154px;
+    height:154px;
+    background:url("../img/button.png");
+    position:relative;
+}
+
+#headUpload{
+    height:154px;
+    width:154px;
+    font-size: 300px;
+    position:absolute;
+    right:0;
+    top:0;
+    opacity: 0;
+    filter:alpha(opacity=0);
+}
