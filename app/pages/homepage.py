@@ -72,6 +72,11 @@ def upload():
         # waterMark = './static/img/logo.png'
         # encode(uploadPath, waterMark, uploadPath)
         """写入数据库"""
-        dbPath=uploadPath[4:]
-        Album('123', dbPath).insert()
+        if request.values['type']=='file':
+            """如果是图片"""
+            dbPath=uploadPath[4:]
+            Album('123', dbPath).insert()
+        else:
+            """如果是头像"""
+            User.update('123','portrait',uploadPath)
         return jsonify({"code": 1111, "msg": "succeed!"})
