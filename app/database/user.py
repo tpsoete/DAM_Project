@@ -184,3 +184,10 @@ class User(Record):
         level = i
         exp = exp - level_exp[i]
         self.level = level
+
+    @classmethod
+    def get_count(cls):
+        db = cls.connect()
+        return db.query("""
+                        SELECT count(*) FROM user
+                    """)[0][0]

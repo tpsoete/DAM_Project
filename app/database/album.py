@@ -61,3 +61,10 @@ class Album(Record):
             ORDER BY RANDOM() LIMIT %d
         """ % count, uid)
         return Album.translate(ans)
+
+    @classmethod
+    def get_count(cls):
+        db = cls.connect()
+        return db.query("""
+                    SELECT count(*) FROM album
+                """)[0][0]

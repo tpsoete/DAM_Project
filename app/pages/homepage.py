@@ -70,13 +70,17 @@ def upload():
         """写入数据库"""
         if request.values['type']=='file':
             """如果是图片"""
-            uploadPath = "app/static/upload/pic.png"
+            num=Album.get_count()
+            code="%09d"%num+".png"
+            uploadPath = "app/static/upload/"+code
             fileUpload.save(uploadPath)
             dbPath = uploadPath[4:]
             Album('123', dbPath).insert()
         else:
             """如果是头像"""
-            uploadPath = "app/static/portrait/001.png"
+            num = User.get_count()
+            code = "%09d" % num + ".png"
+            uploadPath = "app/static/portrait/" + code
             fileUpload.save(uploadPath)
             dbPath = uploadPath[4:]
             User.update('123','portrait',dbPath)
