@@ -16,9 +16,10 @@ def hello_register():
         realname = data['username']
         nickname = data['nikName']
         password = data['password']
+        gender = data['gender']
         if username is None or len(username) < 2:
             return "无效ID"
-        result = User.register(uid=username, password=password, nickname=nickname, real_name=realname)
+        result = User.register(uid=username, password=password, nickname=nickname, real_name=realname, gender=gender)
         print(result)
         if result:
             return "1"
