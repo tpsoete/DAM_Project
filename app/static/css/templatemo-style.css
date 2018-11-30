@@ -50,6 +50,52 @@ body, html {
   padding: 20px 60px;
 }
 
+/*search*/
+.searchpart {
+  margin-top: 5px;
+  width: 50px;
+  height: 70px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 1280px;
+  float:left;
+}
+.search {
+	padding:10px 0;
+}
+.search form {
+  height: 50px;
+}
+.search input {
+  height: 50px;
+  width: 100px;
+  border-radius: 10px;
+  border: 1px solid #d3145a;
+  background: transparent;
+  transition: .3s linear;
+  float: right;
+}
+.search input:focus {
+  width: 300px;
+   background: #ffffff;
+}
+.search button {
+  border:none;
+  outline:none;
+  background: none;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  position: absolute;
+  margin-right: 2px;
+}
+.search button:before{
+  content:"\f002";
+  font-family: 'FontAwesome', sans-serif;
+  color: #d3145a;
+}
+
+
 /* Nav Bar */
 
 nav .logo {
@@ -432,15 +478,18 @@ nav {
   padding: 15px 0px;
 }
 
-.overlay-menu ul li a {
+.overlay-menu ul li button{
   font-size: 24px;
   font-weight: 300;
   color: #d3145a;
   text-decoration: none;
   transition: all 0.5s;
+  background: none;
+  border:none;
 }
 
-.overlay-menu ul li a:hover {
+
+.overlay-menu ul li button:hover {
   color: rgba(250,250,250,0.5);
 }
 

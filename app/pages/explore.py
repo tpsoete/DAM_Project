@@ -11,6 +11,7 @@ def hello_explore():
         return render_template("explore.html")
     else:
         data = json.loads(request.get_data())
+        print(data)
         dtype = data['type']
         if dtype == "recommend":
             # 推荐用户
@@ -25,18 +26,31 @@ def hello_explore():
                     "nickname": rec.nickname,
                     "portrait": rec.portrait
                 })
+            # print(result)
             return json.dumps(result)
 
         elif dtype == "explore":
             uid = data['username']
             ans = Album.explore(uid, 9)
+
             result = []
             for al in ans:
                 assert isinstance(al, Album)
                 result.append({
-                    "username": al.uid,
-                    "photo": al.photo
+                    "nickname": User.get(al.uid).nickname,
+                    "img": al.photo
                 })
+            # print(result)
             return json.dumps(result)
+
+        elif dtype == "view":
+            un = data['nikName']
+            print(un)
+            return "123"
+
+        else:
+            return None
+
+
 
 

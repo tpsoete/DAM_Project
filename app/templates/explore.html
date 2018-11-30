@@ -5,21 +5,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Highway Grid CSS Template</title>
 <!--
-
 Highway Template
-
 http://www.templatemo.com/tm-520-highway
-
 -->
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
         <link rel="stylesheet" href="static/css/bootstrap.min.css">
         <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="static/css/fontAwesome.css">
         <link rel="stylesheet" href="static/css/light-box.css">
         <link rel="stylesheet" href="static/css/templatemo-style.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
         <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
@@ -27,14 +24,21 @@ http://www.templatemo.com/tm-520-highway
     </head>
 
 <body>
-
     <nav>
         <div class="logo">
             <img src="static/img/logo.png">
         </div>
-      <div class="menu-icon">
-        <span></span>
-      </div>
+        <div class="searchpart">
+          <div class="search">
+             <form>
+                <input id="explorer" type="text" placeholder="">
+                <button id="search-button"></button>
+             </form>
+           </div>
+        </div>
+        <div class="menu-icon">
+           <span></span>
+        </div>
     </nav>
 
     <div class="page-heading">
@@ -47,41 +51,43 @@ http://www.templatemo.com/tm-520-highway
 
     <div class = "part">
         <div class = "left_p"><p>发现用户</p></div>
-         <div class = "right_p"><p>查看全部</p></div>
+         <div class = "right_p" id = "change-button"><p>换一批</p></div>
     <div class="user">
        <div class = "user_detail">
-          <img src = "static/img/masonry_item_2.png">
-          <p>XXX</p>
-          <button>关注</button>
+          <img src = "static/img/1.png" >
+          <p class="nikName">小蓉蓉</p>
+          <button class="view-button">查看用户</button>
        </div>
        <div class = "user_detail">
-          <img src = "static/img/masonry_item_2.png">
-          <p>XXX</p>
-          <button>关注</button>
+          <img src = "static/img/2.jpg">
+          <p class="nikName">小琦琦</p>
+          <button class="view-button">查看用户</button>
        </div>
        <div class = "user_detail">
-          <img src = "static/img/masonry_item_2.png">
-          <p>XXX</p>
-          <button>关注</button>
+          <img src = "static/img/3.png" onclick="select()">
+          <p class="nikName">小远远</p>
+          <button class="view-button">查看用户</button>
        </div>
     </div>
     </div>
 
 
     <div class="grid-portfolio" id="portfolio">
-        <div class = "left_p2"><p>发现用户</p></div>
+        <div class = "left_p2"><p>发现用户的图片</p></div>
         <div class="container">
             <div class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
                     <div class="thumb">
-                        <a href="static/img/big_portfolio_item_4.png" data-lightbox="image-1"><div class="hover-effect">
+                        <a href="static/img/8.png" data-lightbox="image-1"><div class="hover-effect">
                             <div class="hover-content">
-                                <h1>Biodiesel <em>squid</em></h1>
-                                <p>Awesome Subtittle Goes Here</p>
+                                <h1>小蓉蓉 <em>’photo</em></h1>
+                                <p>查看更多</p>
                             </div>
                         </div></a>
-                        <div class="image">
-                            <img src="static/img/portfolio_item_4.png">
+                        <div style="width:350px;height:270px;overflow: hidden">
+                            <div class="image">
+                            <img src="static/img/8.png">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,14 +95,16 @@ http://www.templatemo.com/tm-520-highway
             <div class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
                     <div class="thumb">
-                        <a href="static/img/big_portfolio_item_2.png" data-lightbox="image-1"><div class="hover-effect">
+                        <a href="static/img/5.png" data-lightbox="image-1"><div class="hover-effect">
                             <div class="hover-content">
-                                <h1>raclette <em>taxidermy</em></h1>
-                                <p>Awesome Subtittle Goes Here</p>
+                                <h1>小琦琦 <em>’photo</em></h1>
+                                <p>查看更多</p>
                             </div>
                         </div></a>
-                        <div class="image">
-                            <img src="static/img/portfolio_item_2.png">
+                        <div style="width:350px;height:270px;overflow: hidden">
+                            <div class="image">
+                            <img src="static/img/5.png">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,14 +112,34 @@ http://www.templatemo.com/tm-520-highway
             <div class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
                     <div class="thumb">
-                        <a href="static/img/big_portfolio_item_3.png" data-lightbox="image-1"><div class="hover-effect">
+                        <a href="static/img/7.png" data-lightbox="image-1"><div class="hover-effect">
                             <div class="hover-content">
-                                <h1>humblebrag <em>brunch</em></h1>
-                                <p>Awesome Subtittle Goes Here</p>
+                                <h1>小萱萱 <em>’photo</em></h1>
+                                <p>查看更多</p>
                             </div>
                         </div></a>
-                        <div class="image">
-                            <img src="static/img/portfolio_item_3.png">
+                        <div style="width:350px;height:270px;overflow: hidden">
+                            <div class="image">
+                            <img src="static/img/7.png">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="portfolio-item">
+                    <div class="thumb">
+                        <a href="static/img/9.png" data-lightbox="image-1"><div class="hover-effect">
+                            <div class="hover-content">
+                                <h1>小远远 <em>’photo</em></h1>
+                                <p>查看更多</p>
+                            </div>
+                        </div></a>
+                        <div style="width:350px;height:270px;overflow: hidden">
+                            <div class="image">
+                            <img src="static/img/9.png">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,29 +147,16 @@ http://www.templatemo.com/tm-520-highway
             <div class="col-md-4 col-sm-6">
                 <div class="portfolio-item">
                     <div class="thumb">
-                        <a href="static/img/big_portfolio_item_1.png" data-lightbox="image-1"><div class="hover-effect">
+                        <a href="static/img/10.png" data-lightbox="image-1"><div class="hover-effect">
                             <div class="hover-content">
-                                <h1>Succulents <em>chambray</em></h1>
-                                <p>Awesome Subtittle Goes Here</p>
+                                <h1>小琦琦 <em>’photo</em></h1>
+                                <p>查看更多</p>
                             </div>
                         </div></a>
-                        <div class="image">
-                            <img src="static/img/portfolio_item_1.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="portfolio-item">
-                    <div class="thumb">
-                        <a href="static/img/big_portfolio_item_5.png" data-lightbox="image-1"><div class="hover-effect">
-                            <div class="hover-content">
-                                <h1>freegan <em>aesthetic</em></h1>
-                                <p>Awesome Subtittle Goes Here</p>
+                       <div style="width:350px;height:270px;overflow: hidden">
+                            <div class="image">
+                            <img src="static/img/10.png">
                             </div>
-                        </div></a>
-                        <div class="image">
-                            <img src="static/img/portfolio_item_5.png">
                         </div>
                     </div>
                 </div>
@@ -151,11 +166,11 @@ http://www.templatemo.com/tm-520-highway
                     <div class="thumb">
                         <a href="static/img/big_portfolio_item_6.png" data-lightbox="image-1"><div class="hover-effect">
                             <div class="hover-content">
-                                <h1>taiyaki <em>vegan</em></h1>
-                                <p>Awesome Subtittle Goes Here</p>
+                                 <h1>小远远 <em>’photo</em></h1>
+                                <p>查看更多</p>
                             </div>
                         </div></a>
-                        <div class="image">
+                        <div class="image" style="width:350px;height:270px;overflow: hidden">
                             <img src="static/img/portfolio_item_6.png">
                         </div>
                     </div>
@@ -166,11 +181,11 @@ http://www.templatemo.com/tm-520-highway
                     <div class="thumb">
                         <a href="static/img/big_portfolio_item_7.png" data-lightbox="image-1"><div class="hover-effect">
                             <div class="hover-content">
-                                <h1>Thundercats <em>santo</em></h1>
-                                <p>Awesome Subtittle Goes Here</p>
+                                 <h1>小萱萱 <em>’photo</em></h1>
+                                <p>查看更多</p>
                             </div>
                         </div></a>
-                        <div class="image">
+                        <div class="image"  style="width:350px;height:270px;overflow: hidden">
                             <img src="static/img/portfolio_item_7.png">
                         </div>
                     </div>
@@ -181,11 +196,11 @@ http://www.templatemo.com/tm-520-highway
                     <div class="thumb">
                         <a href="static/img/big_portfolio_item_8.png" data-lightbox="image-1"><div class="hover-effect">
                             <div class="hover-content">
-                                <h1>wayfarers <em>yuccie</em></h1>
-                                <p>Awesome Subtittle Goes Here</p>
+                                 <h1>小萱萱 <em>’photo</em></h1>
+                                <p>查看更多</p>
                             </div>
                         </div></a>
-                        <div class="image">
+                        <div class="image" style="width:350px;height:270px;overflow: hidden">
                             <img src="static/img/portfolio_item_8.png">
                         </div>
                     </div>
@@ -196,11 +211,11 @@ http://www.templatemo.com/tm-520-highway
                     <div class="thumb">
                         <a href="static/img/big_portfolio_item_9.png" data-lightbox="image-1"><div class="hover-effect">
                             <div class="hover-content">
-                                <h1>disrupt <em>street</em></h1>
-                                <p>Awesome Subtittle Goes Here</p>
+                                 <h1>小远远 <em>’photo</em></h1>
+                                <p>查看更多</p>
                             </div>
                         </div></a>
-                        <div class="image">
+                        <div class="image" style="width:350px;height:270px;overflow: hidden">
                             <img src="static/img/portfolio_item_9.png">
                         </div>
                     </div>
@@ -226,30 +241,29 @@ http://www.templatemo.com/tm-520-highway
     </footer>
 
 
-
     <section class="overlay-menu">
-      <div class="container">
-        <div class="row">
-          <div class="main-menu">
-              <ul>
-                  <li>
-                      <a href="/homepage">HOMEPAGE</a>
-                  </li>
-                  <li>
-                      <a href="/explore">EXPLORE</a>
-                  </li>
-                   <li>
-                      <a>ABOUT US</a>
-                  </li>
-              </ul>
-              <p>We create awesome templates for you.</p>
-          </div>
+        <div class="container">
+            <div class="row">
+                <div class="main-menu">
+                    <ul>
+                        <li>
+                            <button id="homepage">HOMEPAGE</button>
+                        </li>
+                        <li>
+                            <button id="explore">EXPLORE</button>
+                        </li>
+                        <li>
+                            <button>ABOUT US</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
 
     <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="static/js/explore.js"></script>
 
     <script src="static/js/vendor/bootstrap.min.js"></script>
 
