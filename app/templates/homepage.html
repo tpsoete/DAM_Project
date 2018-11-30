@@ -20,7 +20,7 @@ http://www.templatemo.com/tm-520-highway
         <link rel="stylesheet" href="../static/css/fontAwesome.css">
         <link rel="stylesheet" href="../static/css/light-box.css">
         <link rel="stylesheet" href="../static/css/templatemo-style.css">
-        <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
 
         <script src="../static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
@@ -46,21 +46,25 @@ http://www.templatemo.com/tm-520-highway
     <div class="main">
         <div class = "user_home">
             <div class = "user_head">
-                <img src = "../static/img/masonry_item_1.png">
+                <img src = "../static/img/head.jpg">
             </div>
 
             <div class = "user_meg">
-                <div id="nickname">XXX</div>
+                <div id="nickname">Doylexxx</div>
                 <span id="followers_list">Followers</span>
                 <span id="pick_list">Picking</span>
                 <span id="edit">edit</span>
-                <div id="realname">X同学</div>
+                <div id="realname">TheoXu</div>
                 <div id="age">20</div>
                 <div id="gender">男孩子</div>
                 <div id="signment">pppppick me upppp</div>
             </div>
 
-            <div id="open_btn" class = "add"></div>
+            <!--<div id="open_btn" class = "add"></div>-->
+
+            <form id = "buttonAdd" method="post" enctype = "multipart/form-data">
+                <input id = "fileInput" name="fileInput" type="file"/>
+            </form>
 
         <!-- 弹窗内容开始 -->
             <div id="background">
@@ -109,29 +113,31 @@ http://www.templatemo.com/tm-520-highway
                         </div>
                     </div>
                     <div class = "line_overlay"></div>
-                    <div class = "user_picking">
-                        <div class = "user_picking_head"><img src = "../static/img/back.png"></div>
-                        <div class = "user_picking_detail">
-                            <div class="followername">XXX</div>
-                            <div class="frealname">TheoXu</div>
+                    <div id = "followerList">
+                        <div class = "user_picking">
+                            <div class = "user_picking_head"><img src = "../static/img/back.png"></div>
+                            <div class = "user_picking_detail">
+                                <div class="followername">XXX</div>
+                                <div class="frealname">TheoXu</div>
+                            </div>
+                            <div class = "user_picking_button"><button>已关注</button></div>
                         </div>
-                        <div class = "user_picking_button"><button>已关注</button></div>
-                    </div>
-                    <div class = "user_picking">
-                        <div class = "user_picking_head"><img src = "../static/img/back.png"></div>
-                        <div class = "user_picking_detail">
-                            <div class="followername">XXX</div>
-                            <div class="frealname">TheoXu</div>
+                        <div class = "user_picking">
+                            <div class = "user_picking_head"><img src = "../static/img/back.png"></div>
+                            <div class = "user_picking_detail">
+                                <div class="followername">XXX</div>
+                                <div class="frealname">TheoXu</div>
+                            </div>
+                            <div class = "user_picking_button_not"><button>PICK</button></div>
                         </div>
-                        <div class = "user_picking_button_not"><button>PICK</button></div>
-                    </div>
-                    <div class = "user_picking">
-                        <div class = "user_picking_head"><img src = "../static/img/back.png"></div>
-                        <div class = "user_picking_detail">
-                            <div class="followername">XXX</div>
-                            <div class="frealname">hdhi</div>
+                        <div class = "user_picking">
+                            <div class = "user_picking_head"><img src = "../static/img/back.png"></div>
+                            <div class = "user_picking_detail">
+                                <div class="followername">XXX</div>
+                                <div class="frealname">hdhi</div>
+                            </div>
+                            <div class = "user_picking_button"><button>已关注</button></div>
                         </div>
-                        <div class = "user_picking_button"><button>已关注</button></div>
                     </div>
                 </div>
 	        </div>
@@ -140,19 +146,18 @@ http://www.templatemo.com/tm-520-highway
                 <div id = "div2">
                     <div class = "div2_inner">
                         <nobr class = "div2_pre1">学号</nobr>
-                        <nobr>3160100000</nobr><br>
+                        <nobr class = "contents">3160101111</nobr><br>
                         <nobr class = "div2_pre1">姓名</nobr>
-                        <nobr>Theo Xu</nobr><br>
+                        <nobr class = "contents">Theo Xu</nobr><br>
                         <nobr class = "div2_pre1">性别</nobr>
-                        <nobr>男孩子</nobr><br>
+                        <nobr class = "contents">男孩子</nobr><br>
                         <nobr class = "div2_pre1">年龄</nobr>
-                        <nobr>20</nobr><br>
+                        <nobr class = "contents">20</nobr><br>
                         <nobr class = "div2_pre1">昵称</nobr>
-                        <nobr><input type="text" class="form_input" placeholder="XXX"/></nobr>
-                        <nobr class = "div2_pre1">微信</nobr>
-                        <nobr><input type="text" class="form_input" placeholder="Pickk"/></nobr>
+                        <nobr class = "contents"><input type="text" class="form_input" placeholder="XXX"/></nobr>
                         <nobr class = "div2_pre1">签名</nobr>
-                        <nobr><input type="text" class="form_input" placeholder="pickkkk me uppppp"/></nobr>
+                        <nobr class = "contents"><input type="text" class="form_input" placeholder="pickkkk me uppppp"/></nobr>
+
                     </div>
                 </div>
 	        </div>
@@ -161,12 +166,12 @@ http://www.templatemo.com/tm-520-highway
         <div class = "post">
             <p>帖子</p>
             <div class="division"></div>
-            <img src = "../static/img/masonry_item_1.png">
-            <img src = "../static/img/masonry_item_1.png">
-            <img src = "../static/img/masonry_item_1.png">
-            <img src = "../static/img/masonry_item_1.png">
-            <img src = "../static/img/masonry_item_1.png">
-            <img src = "../static/img/masonry_item_1.png">
+            <img src = "../static/img/post1.jpg">
+            <img src = "../static/img/post2.jpg">
+            <img src = "../static/img/post3.jpg">
+            <img src = "../static/img/post4.jpg">
+            <img src = "../static/img/post5.jpg">
+            <img src = "../static/img/post6.jpg">
         </div>
     </div>
 
@@ -184,10 +189,10 @@ http://www.templatemo.com/tm-520-highway
                 <div class="main-menu">
                     <ul>
                         <li>
-                            <a href="/homepage">HOMEPAGE</a>
+                            <a href="homepage.html">HOMEPAGE</a>
                         </li>
                         <li>
-                            <a href="/explore">EXPLORE</a>
+                            <a href="explore.html">EXPLORE</a>
                         </li>
                         <li>
                             <a>ABOUT US</a>
@@ -198,8 +203,9 @@ http://www.templatemo.com/tm-520-highway
         </div>
     </section>
 
-	<script src="../static/js/弹窗.js"></script>
     <script src="../static/js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="../static/js/uploadFile.js"></script>
+	<script src="../static/js/弹窗.js"></script>
 
     <script src="../static/js/vendor/bootstrap.min.js"></script>
 

@@ -24,7 +24,6 @@ body::-webkit-scrollbar-thumb {
 body, html {
   height: 100%;
   min-height: 100%;
-  overflow-x: hidden;
 }
 .back{
   background-image: url(../img/back.png);
@@ -35,7 +34,7 @@ body, html {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  width: 110%;
+  width: 1532px;
   text-align: center;
 }
 
