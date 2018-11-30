@@ -65,9 +65,11 @@ def upload():
         fileUpload = request.files['fileInput']
         # if not(fileUpload and allowed_file(fileUpload.filename)):
         #    return jsonify({"error": 1001, "msg": "type error"})
-
+        print(request.values['type'])
         uploadPath = "app/static/upload/pic.png"
         fileUpload.save(uploadPath)
+
+
 
         # waterMark = './static/img/logo.png'
         # encode(uploadPath, waterMark, uploadPath)
