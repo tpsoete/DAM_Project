@@ -1,10 +1,11 @@
-from app.database.user import *
-from app.database.album import *
-from app.database.video import *
-from app.database.relation import *
+from .user import *
+from .album import *
+from .video import *
+from .relation import *
+from .coin import *
 
 __all__ = ['Database', 'Record',
-           'User', 'Album', 'Video', 'Relation']
+           'User', 'Album', 'Video', 'Relation', 'Coin']
 
 
 def reset_database():   # 初始化全部数据
@@ -12,6 +13,7 @@ def reset_database():   # 初始化全部数据
     Album.reset()
     Video.reset()
     Relation.reset()
+    Coin.reset()
 
 
 if __name__ == '__main__':
