@@ -30,6 +30,8 @@ def picking():
             nickname = data['newNick']
             User.update(username, 'signature', signature)
             User.update(username, 'nickname', nickname)
+            return jsonify({"code": 1111, "msg": "succeed!"})
+
         if dtype == "photo":
             user = User.get(username)
             album_list = Album.get_mine(user.uid)
@@ -40,6 +42,7 @@ def picking():
             }
             result_json = json.dumps(result)
             return result_json
+
         if dtype == "homepage":
             user = User.get(username)
             if user.birth is None:

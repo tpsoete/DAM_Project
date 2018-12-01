@@ -146,20 +146,21 @@ http://www.templatemo.com/tm-520-highway
                 <div class = "div2">
                     <div class = "div2_inner">
                         <nobr class = "div2_pre1">学号</nobr>
-                        <nobr class = "contents">3160101111</nobr><br>
+                        <nobr class = "contents" id="uid">3160101111</nobr><br>
                         <nobr class = "div2_pre1">姓名</nobr>
-                        <nobr class = "contents">Theo Xu</nobr><br>
+                        <nobr class = "contents" id="uname">Theo Xu</nobr><br>
                         <nobr class = "div2_pre1">性别</nobr>
-                        <nobr class = "contents">男孩子</nobr><br>
+                        <nobr class = "contents" id="ugender">男孩子</nobr><br>
                         <nobr class = "div2_pre1">年龄</nobr>
-                        <nobr class = "contents">20</nobr><br>
+                        <nobr class = "contents" id="uage">20</nobr><br>
                         <nobr class = "div2_pre1">昵称</nobr>
-                        <nobr class = "contents"><input type="text" class="form_input" placeholder="XXX"/></nobr>
+                        <nobr class = "contents"><input type="text" class="form_input" id="unick" placeholder="XXX"/></nobr>
                         <nobr class = "div2_pre1">签名</nobr>
-                        <nobr class = "contents"><input type="text" class="form_input" placeholder="pickkkk me uppppp"/></nobr>
+                        <nobr class = "contents"><input type="text" class="form_input" id="usign" placeholder="pickkkk me uppppp"/></nobr>
                         <form id = "headFile" method="post" enctype = "multipart/form-data">
                             <input id = "headUpload" name="fileInput" type="file"/>
                         </form>
+                        <input type="submit" id="submit" value="OK">
                     </div>
                 </div>
 	        </div>
@@ -206,8 +207,6 @@ http://www.templatemo.com/tm-520-highway
         var explorer = {{ explorer }}
     </script>
     <script src="static/js/homepage.js"></script>
-
-	<script src="static/js/弹窗.js"></script>
     <script src="static/js/vendor/bootstrap.min.js"></script>
 
     <script src="static/js/plugins.js"></script>
