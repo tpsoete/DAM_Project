@@ -23,17 +23,32 @@ def picking():
     else:
         data = json.loads(request.get_data())
         dtype = data['type']
-        print(dtype)
         username = data['username']  # 输入
-        print(username)
-        print(data['explorer'])
-        #昵称
-        #姓名
-        #年龄
-        #性别
-        #个签
-        #头像
-        #发过的图片
+        explorer = data['explorer']
+        # 昵称
+        # 姓名
+        # 年龄
+        # 性别
+        # 个签
+        # 头像
+        # 发过的图片
+        if dtype == "homepage":
+            user = User.get(username)
+            if user.birth is None:
+                age=0
+            else:
+                age=1
+            album_list=Album.get_mine(user.uid)
+            result={
+                "nickname": user.nickname,
+                "realname": user.real_name,
+                "age": age,
+                "gender": user.gender,
+                "signature": user.signature,
+                "portrait": 'app/'+user.portrait,
+                "album":album_list
+            }
+            return result
         if dtype == "picking":
             re = []
             picked_id = Relation.get_picked(username)
@@ -78,20 +93,20 @@ def upload():
         # waterMark = './static/img/logo.png'
         # encode(uploadPath, waterMark, uploadPath)
         """写入数据库"""
-        if request.values['type']=='file':
+        username=request.values['username']
+        if request.values['type'] == 'file':
             """如果是图片"""
-            num=Album.get_count()
-            code="%09d"%num+".png"
-            uploadPath = "app/static/upload/"+code
+            num = Album.get_count()
+            code = "%09d" % num + ".png"
+            uploadPath = "app/static/upload/" + code
             fileUpload.save(uploadPath)
             dbPath = uploadPath[4:]
-            Album('123', dbPath).insert()
+            Album(username, dbPath).insert()
         else:
             """如果是头像"""
-            num = User.get_count()
-            code = "%09d" % num + ".png"
+            code = username+ ".png"
             uploadPath = "app/static/portrait/" + code
             fileUpload.save(uploadPath)
             dbPath = uploadPath[4:]
-            User.update('123','portrait',dbPath)
+            User.update(username, 'portrait', dbPath)
         return jsonify({"code": 1111, "msg": "succeed!", "path": dbPath})

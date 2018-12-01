@@ -68,3 +68,11 @@ class Album(Record):
         return db.query("""
                     SELECT count(*) FROM album
                 """)[0][0]
+
+    @classmethod
+    def get_mine(cls, uid):
+        db = cls.connect()
+        return db.query("""
+                            SELECT photo FROM album
+                            WHERE uid=?
+                        """, uid)
