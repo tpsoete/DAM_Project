@@ -86,7 +86,6 @@ def picking():
 @app.route('/upload', methods=['POST'])
 def upload():
     if request.method == 'POST':
-        print("1111")
         fileUpload = request.files['fileInput']
         # if not(fileUpload and allowed_file(fileUpload.filename)):
         #    return jsonify({"error": 1001, "msg": "type error"})

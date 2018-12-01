@@ -21,7 +21,9 @@ function getInfo(){
         type:"POST",
         dataType:"json",
         success:function (result) {
+            if (username===explorer) {
 
+            }
         }
     })
 }
@@ -54,6 +56,7 @@ $(function () {
     $("#headFile").on("change", function () {
         var formData = new FormData($("#headFile")[0]);
         formData.append("type","head");
+        formData.append("username",username);
         $.ajax({
             url:"/upload",
             type:"POST",
