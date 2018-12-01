@@ -19,12 +19,10 @@ def hello_register():
         password = data['password']
         gender = data['gender']
         birth=data['birthday']
-        timeStruct = time.strptime(birth, "%Y-%m-%d")
-        timeStamp = int(time.mktime(timeStruct))
         if username is None or len(username) < 2:
             return "无效ID"
         result = User.register(uid=username, password=password, nickname=nickname, real_name=realname, gender=gender,
-                               birth=timeStamp)
+                               birth=birth)
         print(result)
         if result:
             return "1"
