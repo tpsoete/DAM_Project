@@ -1,3 +1,9 @@
+var uName;
+var uAge;
+var uGender;
+var uNick;
+var uSign;
+
 function addImg(imgsrc) {
     var post = document.getElementById("post");
     var img = document.createElement("img");
@@ -13,19 +19,24 @@ function setHead(imgsrc){
 function setInformation(info) {
     setHead(info.portrait);
     var nickName = document.getElementById("nickname");
-    nickName.innerHTML = info.nickname;
+    uNick = info.nickname;
+    nickName.innerHTML = uNick;
 
     var realName = document.getElementById("realname");
-    realName.innerHTML = info.realname;
+    uName = info.realname;
+    realName.innerHTML = uName;
 
     var userAge = document.getElementById("age");
-    userAge.innerHTML = info.age;
+    uAge = info.age;
+    userAge.innerHTML = uAge;
 
     var userGender = document.getElementById("gender");
-    userGender.innerHTML = info.gender;
+    uGender = info.gender;
+    userGender.innerHTML = uGender;
 
     var userSign = document.getElementById("signment");
-    userSign .innerHTML = info.signature;
+    uSign = info.signature;
+    userSign .innerHTML = uSign;
 }
 
 function getInfo(){
@@ -129,14 +140,93 @@ $(function () {
         });
     });
 
+    $("#submit").click(function () {
+        var newNick = $("#unick").val();
+        var newSign = $("#usign").val();
+        var data = JSON.stringify({
+            type:"information",
+            username:username,
+            newNick:newNick,
+            newSign:newSign
+        })
+        $.ajax({
+            data:data,
+            type:"POST",
+            dataType:"json",
+            success:function (result) {
+                div3.style.display = "none";
+                getInfo();
+            }
+        })
+    })
+
     $("#homepage").click(function(){
         window.location.href="homepage?"+"username="+encodeURI(explorer)+"&explorer="+encodeURI(explorer);//change after merge
-
     })
 
     $("#explore").click(function(){
         window.location.href="explore?"+"username="+encodeURI(explorer);//change after merge
-
     })
+
+    var btn = document.getElementById('pick_list');
+    var btn2 = document.getElementById('followers_list');
+    var btn3 = document.getElementById('edit');
+    var div = document.getElementById('background');
+    var div2 = document.getElementById('background2');
+    var div3 = document.getElementById('background3');
+    var close = document.getElementById('close-button');
+    var close2 = document.getElementById('close-button2');
+
+    var followers = document.getElementById('followerList');
+
+    btn.onclick = function show() {
+        div.style.display = "block";
+    }
+    btn2.onclick = function show() {
+        div2.style.display = "block";
+        var followerRequest = new XMLHttpRequest();
+        followerRequest.open('GET', '');
+        followerRequest.onload = function () {
+            var followerList = JSON.parse(followerRequest.responseText);
+            renderHTML(followerList);
+        };
+        followerRequest.send();
+    }
+
+    function renderHTML(data) {
+        var htmlString = "test string!";
+        followers.insertAdjacentHTML('beforeend', htmlString);
+    }
+
+    btn3.onclick = function show() {
+        div3.style.display = "block";
+        document.getElementById("uid").innerHTML = username;
+        document.getElementById("uname").innerHTML = uName;
+        document.getElementById("uage").innerHTML = uAge;
+        document.getElementById("ugender").innerHTML = uGender;
+        document.getElementById("unick").setAttribute("placeholder", uNick);
+        document.getElementById("usign").setAttribute("placeholder", uSign);
+    }
+
+    close.onclick = function close() {
+        div.style.display = "none";
+    }
+    close2.onclick = function close(){
+        div2.style.display = "none";
+    }
+
+    window.onclick = function close(e) {
+        if (e.target == div) {
+            div.style.display = "none";
+        }
+        else if(e.target == div2){
+            div2.style.display = "none";
+        }
+        else if(e.target == div3){
+            div3.style.display = "none";
+        }
+    }
+
+
 })
 
