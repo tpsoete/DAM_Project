@@ -42,7 +42,7 @@ class User(Record):
     def from_tuple(cls, tpl):
         self = cls()
         self.uid, self.real_name, self.nickname, self.password, self.gender, self.birth, self.level, \
-        self.portrait, self.signature, self.address = tpl
+            self.portrait, self.signature, self.address = tpl
         return self
 
     def to_tuple(self):

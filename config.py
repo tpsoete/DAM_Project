@@ -15,7 +15,7 @@ class DebugConfig(Config):
 
 
 class ReleaseConfig(Config):
-    DEBUG = False
+    DEBUG = True
 
     PUBLIC_HOST = True
     PORT = 80
