@@ -49,11 +49,11 @@ def picking():
             if user.birth is None:
                 age = 0
             else:
-                now_time=time.time()
-                year=now_time-user.birth
-                age=time.localtime(year)
-                age-=1970
-                age=int(age)
+                now_time = time.time()
+                year = now_time - 0
+                age = time.localtime(year)
+                year = age.tm_year - 1970
+                age = int(year)
 
             result = {
                 "nickname": user.nickname,
