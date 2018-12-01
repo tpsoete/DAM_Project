@@ -16,14 +16,24 @@ def allowed_file(filename):
 @app.route('/homepage', methods=['POST', 'GET'])  # 获取该用户所有已关注的用户信息
 def picking():
     if request.method == 'GET':
-        return render_template("homepage.html")
+        username = request.args.get('username')
+        explorer = request.args.get('explorer')
+        return render_template("homepage.html", username=username, explorer=explorer)
 
     else:
         data = json.loads(request.get_data())
         dtype = data['type']
-
+        print(dtype)
         username = data['username']  # 输入
-
+        print(username)
+        print(data['explorer'])
+        #昵称
+        #姓名
+        #年龄
+        #性别
+        #个签
+        #头像
+        #发过的图片
         if dtype == "picking":
             re = []
             picked_id = Relation.get_picked(username)

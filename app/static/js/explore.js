@@ -1,7 +1,7 @@
 var user_update = function() {
     var data = JSON.stringify({
         type: "recommend",
-        username: username
+        username: username,
     })
     $.ajax({
         data: data,
