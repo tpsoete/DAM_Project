@@ -63,7 +63,7 @@ $(function(){
     })
 
     $("#homepage").click(function(){
-        window.location.href="homepage?"+"username="+encodeURI(username);//change after merge
+        window.location.href="homepage?"+"username="+encodeURI(username)+"&explorer="+encodeURI(username);//change after merge
 
     })
 
