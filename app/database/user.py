@@ -88,13 +88,13 @@ class User(Record):
         return cls.LoginStatus.SUCCESS
 
     @classmethod
-    def register(cls, uid, real_name, nickname, password,gender):
+    def register(cls, uid, real_name, nickname, password,gender,birth):
         db = Database(cls._db)
         try:
             if cls.uid_exists(uid):
                 return False
             temp = cls(uid=uid, real_name=real_name, nickname=nickname, password=password,gender=gender,
-                       portrait="static/portrait/default.png")
+                       portrait="static/portrait/default.png",birth=birth)
             temp.insert(db)
             return True
         except Exception as e:
