@@ -25,20 +25,23 @@ def picking():
         dtype = data['type']
         username = data['username']  # 输入
         explorer = data['explorer']
-        # 昵称
-        # 姓名
-        # 年龄
-        # 性别
-        # 个签
-        # 头像
-        # 发过的图片
+        if dtype=="photo":
+            user = User.get(username)
+            album_list = Album.get_mine(user.uid)
+            count=Album.get_my_count(username)
+            result={
+                "album": album_list,
+                "count":count
+            }
+            result_json = json.dumps(result)
+            return result_json
         if dtype == "homepage":
             user = User.get(username)
             if user.birth is None:
                 age=0
             else:
                 age=1
-            album_list=Album.get_mine(user.uid)
+
             result={
                 "nickname": user.nickname,
                 "realname": user.real_name,
@@ -46,9 +49,9 @@ def picking():
                 "gender": user.gender,
                 "signature": user.signature,
                 "portrait": user.portrait,
-                "album":album_list
             }
-            return result
+            result_json = json.dumps(result)
+            return result_json
         if dtype == "picking":
             re = []
             picked_id = Relation.get_picked(username)
