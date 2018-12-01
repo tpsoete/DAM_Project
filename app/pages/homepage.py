@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 from flask import render_template, request, jsonify, redirect, url_for
 from app import app
@@ -48,7 +49,11 @@ def picking():
             if user.birth is None:
                 age = 0
             else:
-                age = 1
+                now_time=time.time()
+                year=now_time-user.birth
+                age=time.localtime(year)
+                age-=1970
+                age=int(age)
 
             result = {
                 "nickname": user.nickname,

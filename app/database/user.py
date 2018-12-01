@@ -16,7 +16,7 @@ class User(Record):
         nickname VARCHAR(20),
         password VARCHAR(20) NOT NULL,
         gender CHAR(1) CHECK (gender IN ('M', 'F') OR gender IS NULL),
-        birth TEXT,
+        birth DATE,
         level INT DEFAULT 0,
         portrait VARCHAR(40),
         signature TEXT,
