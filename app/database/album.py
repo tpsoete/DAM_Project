@@ -70,6 +70,14 @@ class Album(Record):
                 """)[0][0]
 
     @classmethod
+    def get_my_count(cls,uid):
+        db = cls.connect()
+        return db.query("""
+                        SELECT count(*) FROM album
+                        WHERE uid=?
+                    """,uid)[0][0]
+
+    @classmethod
     def get_mine(cls, uid):
         db = cls.connect()
         return db.query("""
