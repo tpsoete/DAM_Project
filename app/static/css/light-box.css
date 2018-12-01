@@ -10,7 +10,7 @@ body.lb-disable-scrolling {
 }
 
 .lightboxOverlay {
-  max-height: 100%;
+  max-height: 270%;
   overflow-y: scroll;
   position: absolute;
   top: 0;
