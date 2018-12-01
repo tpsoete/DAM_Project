@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Register</title>
      <link rel="stylesheet" href="static/css/templatemo-style.css">
+    <link rel="stylesheet" href="static/css/register.css">
 </head>
 <body>
     <div class = "register">
@@ -12,6 +13,16 @@
             <div><input id='id' type="text" class="form_input" placeholder="学号"/></div>
             <div><input id='username' type="text" class="form_input" placeholder="姓名"/></div>
             <div><input id='nikName' type="text" class="form_input" placeholder="昵称"/></div>
+            <div id="gender">
+                <select id="usergender">
+                    <option value="M">男孩子</option>
+                    <option value="F">女孩子</option>
+                </select>
+            </div>
+            <div id="birth">
+                <input id="userbirth" type="date" value="1998-06-01" />
+            </div>
+
             <div><input id='password' type="password" class="form_input" placeholder="密码"/></div>
             <div><button id="register-button" class = "login-button" type="submit">登录</button></div>
             <div class="link_register"><nobr>有账户了？</nobr>
@@ -28,7 +39,9 @@
                     id : $("#id").val(),
                     nikName : $("#nikName").val(),
                     username : $("#username").val(),
-                    password : $("#password").val()
+                    password : $("#password").val(),
+                    gender: $("#usergender option:selected").val(),
+                    birthday: $("#userbirth").val()
                 })
 
                 $.ajax({

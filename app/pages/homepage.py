@@ -6,6 +6,7 @@ from flask import render_template, request, jsonify, redirect, url_for
 from app import app
 from app.database import Relation, User, Album
 from werkzeug.utils import secure_filename
+from .encode import encode
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'JPG', 'PNG', 'bmp'}
 
@@ -50,7 +51,7 @@ def picking():
                 age = 0
             else:
                 now_time = time.time()
-                year = now_time - 0
+                year = now_time - user.birth
                 age = time.localtime(year)
                 year = age.tm_year - 1970
                 age = int(year)
@@ -104,11 +105,8 @@ def picking():
 def upload():
     if request.method == 'POST':
         fileUpload = request.files['fileInput']
-        # if not(fileUpload and allowed_file(fileUpload.filename)):
-        #    return jsonify({"error": 1001, "msg": "type error"})
-        # waterMark = './static/img/logo.png'
-        # encode(uploadPath, waterMark, uploadPath)
         """写入数据库"""
+
         username = request.values['username']
         if request.values['type'] == 'file':
             """如果是图片"""
@@ -125,4 +123,5 @@ def upload():
             fileUpload.save(uploadPath)
             dbPath = uploadPath[4:]
             User.update(username, 'portrait', dbPath)
+        encode(uploadPath, "app/static/img/back.png", uploadPath, 1.0);
         return jsonify({"code": 1111, "msg": "succeed!", "path": dbPath})

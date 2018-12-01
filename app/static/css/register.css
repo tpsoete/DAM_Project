@@ -1,0 +1,54 @@
+#gender{
+    margin-top: 10px;
+    width: 250px;
+    height: 25px;
+    overflow: hidden;
+    background: #dcdcdc;
+    border: 5px solid #dcdcdc;
+    border-radius: 5%;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    margin-left: 76px;
+}
+
+#gender select{
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    background:transparent;
+    border:none;
+    width: 250px;
+    height:100%;
+    color: #767676;
+}
+
+#birth{
+    margin-top: 10px;
+    width: 250px;
+    height: 25px;
+    overflow: hidden;
+    background: #dcdcdc;
+    border: 5px solid #dcdcdc;
+    border-radius: 5%;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    margin-left: 76px;
+}
+
+#userbirth{
+    background:transparent;
+    border:none;
+    width: 250px;
+    height:100%;
+    color: #767676;
+}
+
+input[type='date']::-webkit-inner-spin-button {
+    display:none;
+}
+input[type="date"]::-webkit-clear-button{
+   display:none;
+}
