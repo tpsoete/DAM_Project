@@ -35,14 +35,15 @@ def picking():
             }
             result_json = json.dumps(result)
             return result_json
+
         if dtype == "homepage":
             user = User.get(username)
             if user.birth is None:
-                age=0
+                age = 0
             else:
-                age=1
-
-            result={
+                age = 1
+            album_list = Album.get_mine(user.uid)
+            result = {
                 "nickname": user.nickname,
                 "realname": user.real_name,
                 "age": age,
@@ -52,6 +53,7 @@ def picking():
             }
             result_json = json.dumps(result)
             return result_json
+
         if dtype == "picking":
             re = []
             picked_id = Relation.get_picked(username)
