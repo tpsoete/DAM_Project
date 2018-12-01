@@ -24,7 +24,12 @@ def picking():
         data = json.loads(request.get_data())
         dtype = data['type']
         username = data['username']  # 输入
-        explorer = data['explorer']
+
+        if dtype=="information":
+            signature=data['newSign']
+            nickname=data['newNick']
+            User.update(username,'signature',signature)
+            User.update(username,'nickname',nickname)
         if dtype=="photo":
             user = User.get(username)
             album_list = Album.get_mine(user.uid)
