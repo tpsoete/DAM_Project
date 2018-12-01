@@ -57,6 +57,7 @@ def picking():
             }
             result_json = json.dumps(result)
             return result_json
+
         if dtype == "picking":
             re = []
             picked_id = Relation.get_picked(username)
