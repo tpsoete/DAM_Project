@@ -90,6 +90,14 @@ function getPic(){
 }
 
 $(function () {
+    document.oncontextmenu = new Function("return false;");
+
+    document.onkeydown = function () {
+        if (window.event && window.event.keyCode == 123) {
+            window.event.returnValue = false;
+        }
+    }
+
     getInfo();
 
     getPic();

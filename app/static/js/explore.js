@@ -49,6 +49,13 @@ user_update();
 thumb_update();
 
 $(function(){
+    document.oncontextmenu = new Function("return false;");
+
+    document.onkeydown = function () {
+        if (window.event && window.event.keyCode == 123) {
+            window.event.returnValue = false;
+        }
+    }
 
     $("#change-button").click(function(){
         user_update();
