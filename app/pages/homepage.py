@@ -45,7 +45,7 @@ def picking():
                 "age": age,
                 "gender": user.gender,
                 "signature": user.signature,
-                "portrait": 'app/'+user.portrait,
+                "portrait": user.portrait,
                 "album":album_list
             }
             return result
