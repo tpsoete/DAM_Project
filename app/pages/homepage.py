@@ -25,29 +25,29 @@ def picking():
         dtype = data['type']
         username = data['username']  # 输入
 
-        if dtype=="information":
-            signature=data['newSign']
-            nickname=data['newNick']
-            User.update(username,'signature',signature)
-            User.update(username,'nickname',nickname)
-        if dtype=="photo":
+        if dtype == "information":
+            signature = data['newSign']
+            nickname = data['newNick']
+            User.update(username, 'signature', signature)
+            User.update(username, 'nickname', nickname)
+        if dtype == "photo":
             user = User.get(username)
             album_list = Album.get_mine(user.uid)
-            count=Album.get_my_count(username)
-            result={
+            count = Album.get_my_count(username)
+            result = {
                 "album": album_list,
-                "count":count
+                "count": count
             }
             result_json = json.dumps(result)
             return result_json
         if dtype == "homepage":
             user = User.get(username)
             if user.birth is None:
-                age=0
+                age = 0
             else:
-                age=1
+                age = 1
 
-            result={
+            result = {
                 "nickname": user.nickname,
                 "realname": user.real_name,
                 "age": age,
@@ -100,7 +100,7 @@ def upload():
         # waterMark = './static/img/logo.png'
         # encode(uploadPath, waterMark, uploadPath)
         """写入数据库"""
-        username=request.values['username']
+        username = request.values['username']
         if request.values['type'] == 'file':
             """如果是图片"""
             num = Album.get_count()
@@ -111,7 +111,7 @@ def upload():
             Album(username, dbPath).insert()
         else:
             """如果是头像"""
-            code = username+ ".png"
+            code = username + ".png"
             uploadPath = "app/static/portrait/" + code
             fileUpload.save(uploadPath)
             dbPath = uploadPath[4:]
